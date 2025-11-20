@@ -1,0 +1,37 @@
+{
+    "name": "ChaosPoppycarsCardsCommissions",
+    "references": [
+        "UnboundLib",
+        "ModdingUtils",
+        "CardChoiceSpawnUniqueCardPatch",
+        "RarityLib",
+        "CardThemeLib",
+        "WillsWackyManagers",
+        "NullManager",
+        "ClassesManagerReborn",
+        "Unity.TextMeshPro",
+        "SimulationChamber",
+        "ChaosPoppycarsCardsCore"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "0Harmony.dll",
+        "BepInEx.dll",
+        "Assembly-CSharp.dll",
+        "SonigonAudioEngine.Runtime.dll",
+        "PhotonUnityNetworking.dll",
+        "PhotonRealtime.dll",
+        "Photon3Unity3D.dll",
+        "TabInfo.dll",
+        "InControl.dll",
+        "PSA.dll",
+        "PlayerActionsHelper.dll",
+        "PlayerTimeScale.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
