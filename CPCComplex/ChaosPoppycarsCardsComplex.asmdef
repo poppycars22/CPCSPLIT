@@ -31,7 +31,8 @@
         "PSA.dll",
         "PlayerActionsHelper.dll",
         "PlayerTimeScale.dll",
-        "RoundsWithFriends.dll"
+        "RoundsWithFriends.dll",
+        "PickNCards.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": []
