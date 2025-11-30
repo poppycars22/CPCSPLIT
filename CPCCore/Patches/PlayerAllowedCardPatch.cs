@@ -20,7 +20,7 @@ namespace CPCCore.Patches
         {
             if(card != null)
             {
-                if (!player.data.stats.GetAdditionalData().Mcnally)
+                if (player.data.stats.GetAdditionalData().Mcnally)
                 {
                     
                     __result = true;

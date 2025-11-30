@@ -16,8 +16,12 @@ using CPCCore.Extensions;
 
 namespace CPCComplex.Cards
 {
-    class GoodGirlCard : CustomCard
+    class GiftOfPower : CustomCard
     {
+        protected override GameObject GetCardBase()
+        {
+            return this.gameObject.GetComponent<CardInfo>().cardBase;
+        }
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
 
@@ -26,9 +30,8 @@ namespace CPCComplex.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            if(DrawNCards.DrawNCards.GetPickerDraws(player.playerID) <= 28)
-                DrawNCards.DrawNCards.SetPickerDraws(player.playerID, DrawNCards.DrawNCards.GetPickerDraws(player.playerID) + 2);
-            characterStats.GetAdditionalData().shuffles += 1;
+            characterStats.GetAdditionalData().CommonShuffle += 1;
+            characterStats.GetAdditionalData().CommonShufflePerPick += 1;
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
         }
@@ -40,38 +43,24 @@ namespace CPCComplex.Cards
 
         protected override string GetTitle()
         {
-            return "Good Girl";
+            return "Gift of Power";
         }
         protected override string GetDescription()
         {
-            return "";
+            return "Get an extra pick phase with only common (or lower) cards";
         }
         protected override GameObject GetCardArt()
         {
-            return ChaosPoppycarsCardsComplex.Bundle.LoadAsset<GameObject>("C_GoodGirl");
+            return ChaosPoppycarsCardsComplex.Bundle.LoadAsset<GameObject>("C_GiftOfPower");
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return RarityUtils.GetRarity("Epic");
+            return RarityUtils.GetRarity("Rare");
         }
         protected override CardInfoStat[] GetStats()
         {
             return new CardInfoStat[]
             {
-               new CardInfoStat()
-               {
-                    positive = true,
-                    stat = "Hand Size",
-                    amount = "+2",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-               },
-               new CardInfoStat()
-               {
-                    positive = true,
-                    stat = "Rare Card Chance",
-                    amount = "+10%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-               }
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

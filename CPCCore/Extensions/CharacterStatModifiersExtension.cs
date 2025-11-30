@@ -62,6 +62,10 @@ namespace CPCCore.Extensions
         public float cursorFear;
         public bool useAmmo;
         public bool Mcnally;
+        public int ShufflesPerPick;
+        public int CommonShuffle;
+        public int CommonShufflePerPick;
+        public bool CommonOnly;
         //public bool storeDamage;
         //public Vector2 storedDamage;
         //public bool takeStoredDamage;
@@ -117,6 +121,10 @@ namespace CPCCore.Extensions
             cursorFear = 0f;
             useAmmo = true;
             Mcnally = false;
+            ShufflesPerPick = 0;
+            CommonShuffle = 0;
+            CommonOnly = false;
+            CommonShufflePerPick = 0;
             //storeDamage = true;
             //storedDamage = Vector2.zero;
             //takeStoredDamage = false;
@@ -196,6 +204,10 @@ namespace CPCCore.Extensions
             __instance.GetAdditionalData().cursorFear = 0f;
             __instance.GetAdditionalData().useAmmo = true;
             __instance.GetAdditionalData().Mcnally = false;
+            __instance.GetAdditionalData().ShufflesPerPick = 0;
+            __instance.GetAdditionalData().CommonShuffle = 0;
+            __instance.GetAdditionalData().CommonOnly = false;
+            __instance.GetAdditionalData().CommonShufflePerPick = 0;
             //__instance.GetAdditionalData().storeDamage = true;
             //__instance.GetAdditionalData().storedDamage = Vector2.zero;
             //__instance.GetAdditionalData().takeStoredDamage = false;

@@ -43,7 +43,7 @@ namespace CPCComplex
         {
             private const string ModId = "com.Poppycars.CPCComplex.Id";
             private const string ModName = "ChaosPoppycarsCardsComplex";
-            public const string Version = "1.0.0"; // What version are we on (major.minor.patch)?
+            public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
             public const string ModInitials = "CPCComplex";
             internal static List<BaseUnityPlugin> plugins;
             public static ChaosPoppycarsCardsComplex Instance { get; private set; }
@@ -54,16 +54,21 @@ namespace CPCComplex
                 Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpccomplex", typeof(ChaosPoppycarsCardsComplex).Assembly);
 
                 RarityLib.Utils.RarityUtils.AddRarity("Geese", 1f, new Color32(172, 172, 172, 255), new Color32(60, 60, 60, 255));
-
-                PlayerActionManager.RegisterPlayerAction(new ActionInfo("Dash", new MouseBindingSource(Mouse.MiddleButton),
-                    new DeviceBindingSource(InputControlType.RightBumper)));
-
-                PlayerActionManager.RegisterPlayerAction(new ActionInfo("BlockMoveSwitch", new KeyBindingSource(Key.R),
-                    new DeviceBindingSource(InputControlType.DPadLeft)));
-
-                PlayerActionManager.RegisterPlayerAction(new ActionInfo("BlockPhaseAction", new KeyBindingSource(Key.V),
-                    new DeviceBindingSource(InputControlType.LeftStickButton)));
-
+                if (!PlayerActionManager.RegisteredActions.ContainsKey("Dash"))
+                {
+                    PlayerActionManager.RegisterPlayerAction(new ActionInfo("Dash", new MouseBindingSource(Mouse.MiddleButton),
+                        new DeviceBindingSource(InputControlType.RightBumper)));
+                }
+                if (!PlayerActionManager.RegisteredActions.ContainsKey("BlockMoveSwitch"))
+                {
+                    PlayerActionManager.RegisterPlayerAction(new ActionInfo("BlockMoveSwitch", new KeyBindingSource(Key.R),
+                        new DeviceBindingSource(InputControlType.DPadLeft)));
+                }
+                if (!PlayerActionManager.RegisteredActions.ContainsKey("BlockPhaseAction"))
+                {
+                    PlayerActionManager.RegisterPlayerAction(new ActionInfo("BlockPhaseAction", new KeyBindingSource(Key.V),
+                        new DeviceBindingSource(InputControlType.LeftStickButton)));
+                }
                 var harmony = new Harmony(ModId);
 
                 harmony.PatchAll();
@@ -85,15 +90,18 @@ namespace CPCComplex
                 ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsComplex).Assembly, Bundle);
 
                 ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => !cardinfo.rarity.Equals(RarityLib.Utils.RarityUtils.GetRarity("Geese")) || PlayerManager.instance.players.Any(p => player.teamID != p.teamID && p.data.currentCards.Contains(GeeseSwarm.Card)));
+                
 
                 ExtensionMethods.ExecuteAfterFrames(this, 60, delegate ()
                 {
-                    Enumerable.ToList<Card>(CardManager.cards.Values).ForEach(delegate (Card card)
-                    {
-                        this.AddMod(card);
-                    });
+                        Enumerable.ToList<Card>(CardManager.cards.Values).ForEach(delegate (Card card)
+                        {
+                            this.AddMod(card);
+                        });
                 });
             }
+            
+
             private void AddMod(Card card)
             {
                 string text = "__Rarity-" + card.cardInfo.rarity;
