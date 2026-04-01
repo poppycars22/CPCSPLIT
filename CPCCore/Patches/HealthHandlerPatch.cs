@@ -34,13 +34,13 @@ namespace CPCCore.Patches
                 return false;
             }
 
-            if (damagingPlayer!= null && damagingPlayer.data.stats.GetAdditionalData().firstDamage == true)
+            if (damagingPlayer != null && damagingPlayer.data.stats.GetAdditionalData().firstDamage == true)
             {
                 damagingPlayer.data.stats.GetAdditionalData().damageMult = damagingPlayer.data.stats.GetAdditionalData().damageMultMax;
                 damagingPlayer.data.stats.GetAdditionalData().firstDamage = false;
-            }  
+            }
 
-            if (damagingPlayer!=null && damagingPlayer.data.stats.GetAdditionalData().reducingDmg)
+            if (damagingPlayer != null && damagingPlayer.data.stats.GetAdditionalData().reducingDmg)
             {
                 damage *= damagingPlayer.data.stats.GetAdditionalData().damageMult;
                 if (damagingPlayer.data.stats.GetAdditionalData().damageMult > 0.05f)
@@ -52,17 +52,10 @@ namespace CPCCore.Patches
             if (player.data.stats.GetAdditionalData().firstHit == true)
             {
                 player.data.stats.GetAdditionalData().firstHit = false;
-                if(player.data.stats.GetAdditionalData().firstHitdmgReduction >0)
+                if (player.data.stats.GetAdditionalData().firstHitdmgReduction > 0)
                     damage /= player.data.stats.GetAdditionalData().firstHitdmgReduction;
             }
-            /*if (lethal && data.health < damage.magnitude && data.stats.GetAdditionalData().remainingTotems > 0)
-            {
-                if (player.GetComponent<TotemEffect>() != null)
-                { player.GetComponent<TotemEffect>().UseMulligan(); }
-                else { return; }
 
-                lethal = false;
-            }*/
             /*if (player.data.stats.GetAdditionalData().storeDamage && !player.data.stats.GetAdditionalData().takeStoredDamage)
             {
                 player.data.stats.GetAdditionalData().storedDamage += damage;
@@ -158,6 +151,17 @@ namespace CPCCore.Patches
                     component4.BulletPush(Vector2.up * ((__instance.spawnedAttack.spawner.data.stats.GetAdditionalData().upwardsKnockback + 5) * Mathf.Pow(__instance.damage / 55f, 2f)) * 5000, hitInfo.transform.InverseTransformPoint(component4.transform.position), __instance.spawnedAttack.spawner.data);
                 }
             }
+        }
+    }
+
+    [Serializable]
+    [HarmonyPatch(typeof(HealthHandler), "Heal")]
+    class ExtraHealingPatch
+    {
+        private static void Prefix(HealthHandler __instance, ref float healAmount)
+        {
+            Player player = (Player)__instance.GetFieldValue("player");
+            healAmount *= player.data.stats.GetAdditionalData().ExtraHeal;
         }
     }
 }

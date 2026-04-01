@@ -16,6 +16,7 @@ using UnboundLib.GameModes;
 using ModdingUtils.Utils;
 using CPCComplex.Cards;
 using RarityLib.Utils;
+using CPCCore.Extensions;
 
 
 namespace CPCComplex
@@ -34,6 +35,8 @@ namespace CPCComplex
         [BepInDependency("root.classes.manager.reborn", BepInDependency.DependencyFlags.HardDependency)]
         [BepInDependency("com.Poppycars.PSA.Id", BepInDependency.DependencyFlags.HardDependency)]
         [BepInDependency("com.Poppycars.CPCCore.Id", BepInDependency.DependencyFlags.HardDependency)]
+        [BepInDependency("pykess.rounds.plugins.pickncards", BepInDependency.DependencyFlags.HardDependency)]
+        [BepInDependency("Systems.R00t.PickPhaseImprovements", BepInDependency.DependencyFlags.HardDependency)]
         // Declares our mod to Bepin
         [BepInPlugin(ModId, ModName, Version)]
 
@@ -43,7 +46,7 @@ namespace CPCComplex
         {
             private const string ModId = "com.Poppycars.CPCComplex.Id";
             private const string ModName = "ChaosPoppycarsCardsComplex";
-            public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
+            public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
             public const string ModInitials = "CPCComplex";
             internal static List<BaseUnityPlugin> plugins;
             public static ChaosPoppycarsCardsComplex Instance { get; private set; }
@@ -101,7 +104,16 @@ namespace CPCComplex
                 });
             }
             
-
+        public bool ExpansionCheck(Player player, CardInfo card)
+        {
+            if (!card.name.Equals("__CPC__Expansion"))
+                    return true;
+            float map = 0;
+            foreach (Player play in PlayerManager.instance.players)
+                map += player.data.stats.GetAdditionalData().mapSizeI;
+            map += MapEmbiggener.MapEmbiggener.setSize;
+            return map + 0.5f <= 7;
+        }
             private void AddMod(Card card)
             {
                 string text = "__Rarity-" + card.cardInfo.rarity;

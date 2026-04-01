@@ -10,6 +10,7 @@ using CPCCore.Utilities;
 using CPCCore;
 using CPCCore.Extensions;
 using RarityLib.Utils;
+using PickPhaseImprovements;
 
 namespace CPCComplex.Cards
 {
@@ -22,13 +23,15 @@ namespace CPCComplex.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             ModdingUtils.Extensions.CardInfoExtension.GetAdditionalData(cardInfo).canBeReassigned = false;
+            PickManager.RegisterShuffleCard(cardInfo, count:2);
             cardInfo.categories = new CardCategory[] { ChaosPoppycarsCardsCore.CPCCoreCardCategories.PoppysChaosCategory };
+            
             CPCDebug.Log($"[{ChaosPoppycarsCardsCore.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.GetAdditionalData().shuffles += 2;
+            
             CPCDebug.Log($"[{ChaosPoppycarsCardsCore.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
         }

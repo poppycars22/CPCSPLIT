@@ -13,10 +13,10 @@ namespace CPCCore.Extensions
     {
 
         public float RainbowLeafHealth;
+        public float DamageAmpDamage;
         public float HealthBouncesBounced;
         public bool useNewRespawnTime;
         public float newRespawnTime;
-        public int shuffles;
         public int GeeseSwarms;
         public int StunningStares;
         public int NanoMachines;
@@ -62,10 +62,13 @@ namespace CPCCore.Extensions
         public float cursorFear;
         public bool useAmmo;
         public bool Mcnally;
-        public int ShufflesPerPick;
-        public int CommonShuffle;
-        public int CommonShufflePerPick;
-        public bool CommonOnly;
+        public float ExtraHeal;
+        //public int CommonShufflePerPick;
+        public bool BlackHole;
+        public bool WhiteHole;
+        public float mapSizeI;
+        //public int ShufflesPerPick;
+        //public int shuffles;
         //public bool storeDamage;
         //public Vector2 storedDamage;
         //public bool takeStoredDamage;
@@ -75,7 +78,6 @@ namespace CPCCore.Extensions
             HealthBouncesBounced = 0f;
             useNewRespawnTime = false;
             newRespawnTime = 0f;
-            shuffles = 0;
             GeeseSwarms = 0;
             StunningStares = 0;
             NanoMachines = 0;
@@ -121,10 +123,13 @@ namespace CPCCore.Extensions
             cursorFear = 0f;
             useAmmo = true;
             Mcnally = false;
-            ShufflesPerPick = 0;
-            CommonShuffle = 0;
-            CommonOnly = false;
-            CommonShufflePerPick = 0;
+            //shuffles = 0;
+            //ShufflesPerPick = 0;
+            ExtraHeal = 1f;
+            BlackHole = false;
+            WhiteHole = false;
+            mapSizeI = 0f;
+            //CommonShufflePerPick = 0;
             //storeDamage = true;
             //storedDamage = Vector2.zero;
             //takeStoredDamage = false;
@@ -158,7 +163,6 @@ namespace CPCCore.Extensions
             __instance.GetAdditionalData().HealthBouncesBounced = 0f;
             __instance.GetAdditionalData().useNewRespawnTime = false;
             __instance.GetAdditionalData().newRespawnTime = 0f;
-            __instance.GetAdditionalData().shuffles = 0;
             __instance.GetAdditionalData().GeeseSwarms = 0;
             __instance.GetAdditionalData().StunningStares = 0;
             __instance.GetAdditionalData().NanoMachines = 0;
@@ -204,10 +208,13 @@ namespace CPCCore.Extensions
             __instance.GetAdditionalData().cursorFear = 0f;
             __instance.GetAdditionalData().useAmmo = true;
             __instance.GetAdditionalData().Mcnally = false;
-            __instance.GetAdditionalData().ShufflesPerPick = 0;
-            __instance.GetAdditionalData().CommonShuffle = 0;
-            __instance.GetAdditionalData().CommonOnly = false;
-            __instance.GetAdditionalData().CommonShufflePerPick = 0;
+            __instance.GetAdditionalData().ExtraHeal = 1f;
+            __instance.GetAdditionalData().BlackHole = false;
+            __instance.GetAdditionalData().WhiteHole = false;
+            __instance.GetAdditionalData().mapSizeI = 0f;
+            //__instance.GetAdditionalData().CommonShufflePerPick = 0;
+            //__instance.GetAdditionalData().ShufflesPerPick = 0;
+            //__instance.GetAdditionalData().shuffles = 0;
             //__instance.GetAdditionalData().storeDamage = true;
             //__instance.GetAdditionalData().storedDamage = Vector2.zero;
             //__instance.GetAdditionalData().takeStoredDamage = false;

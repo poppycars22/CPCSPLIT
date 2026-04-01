@@ -24,8 +24,9 @@ namespace CPCCurses.Cards
         internal static CardInfo Card = null;
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
+
             cardInfo.GetAdditionalData().canBeReassigned = false;
-            cardInfo.categories = new CardCategory[] { CurseManager.instance.curseCategory, ChaosPoppycarsCardsCurses.CPCCardCategories.IgnoreLetterCategory };
+            cardInfo.categories = new CardCategory[] { CurseManager.instance.curseCategory, ChaosPoppycarsCardsCurses.CPCCardCategories.IgnoreLetterCategory, CustomCardCategories.instance.CardCategory("CardManipulation") };
             CPCDebug.Log($"[{ChaosPoppycarsCardsCurses.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }

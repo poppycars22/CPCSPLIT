@@ -41,8 +41,11 @@ namespace CPCCurses.Cards
         {
             ChaosPoppycarsCardsCurses.Instance.ExecuteAfterFrames(10, () => {
                 var curses = CurseManager.instance.GetAllCursesOnPlayer(player);
-                var curse = curses[UnityEngine.Random.Range(0, curses.Count())];
-                ModdingUtils.Utils.Cards.instance.RemoveCardFromPlayer(player, curse, ModdingUtils.Utils.Cards.SelectionType.Oldest);
+                if (curses.Length != 0)
+                {
+                    var curse = curses[UnityEngine.Random.Range(0, curses.Length)];
+                    ModdingUtils.Utils.Cards.instance.RemoveCardFromPlayer(player, curse, ModdingUtils.Utils.Cards.SelectionType.Oldest);
+                }
             });
             CPCDebug.Log($"[{ChaosPoppycarsCardsCore.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected

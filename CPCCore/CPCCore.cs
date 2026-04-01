@@ -8,6 +8,7 @@ using CPCCore.Utilities;
 using CPCTabInfoSTATS;
 using HarmonyLib;
 using Jotunn.Utils;
+using MapEmbiggener.Controllers;
 using ModdingUtils;
 using Photon.Realtime;
 using RarityLib.Utils;
@@ -47,7 +48,7 @@ namespace CPCCore
     [BepInDependency("com.root.player.time", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.willuwontu.rounds.tabinfo", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.rsmind.rounds.fancycardbar", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("pykess.rounds.plugins.mapembiggener", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("pykess.rounds.plugins.mapembiggener", BepInDependency.DependencyFlags.HardDependency)]
     // Declares our mod to Bepin
     [BepInPlugin(ModId, ModName, Version)]
 
@@ -57,7 +58,7 @@ namespace CPCCore
     {
         private const string ModId = "com.Poppycars.CPCCore.Id";
         private const string ModName = "ChaosPoppycarsCardsCore";
-        public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.4"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCore";
         public static Harmony harmony;
         internal static List<BaseUnityPlugin> plugins;
@@ -150,7 +151,6 @@ namespace CPCCore
             Instance = this;
             GameModeManager.AddHook(GameModeHooks.HookGameStart, this.GameStart);
 
-            ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => CommonOnly(player, cardinfo));
 
 
             if (plugins.Exists(plugin => plugin.Info.Metadata.GUID == "com.willuwontu.rounds.tabinfo"))
@@ -164,8 +164,7 @@ namespace CPCCore
             //ChaosPoppycarsCardsCore.ArtAssets = AssetUtils.LoadAssetBundleFromResources("cpccore", typeof(ChaosPoppycarsCardsCore).Assembly);
             RegisterCards(typeof(ChaosPoppycarsCardsCore).Assembly, Bundle);
             GameModeManager.AddHook(GameModeHooks.HookPointEnd, PointEnd);
-            GameModeManager.AddHook(GameModeHooks.HookPickEnd, (gm) => RegainStuff());
-            GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, (gm) => ExtraPicks());
+            //GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, (gm) => ExtraPicks());
             //  GameModeManager.AddHook(GameModeHooks.HookBattleStart, LightSaberRangeReset);
             // make cards mutually exclusive
             this.ExecuteAfterFrames(10, () =>
@@ -187,61 +186,14 @@ namespace CPCCore
             CardCategory[] categories = CollectionExtensions.AddToArray<CardCategory>(card.cardInfo.categories, cardCategory);
             card.cardInfo.categories = categories;
         }
-        public bool CommonOnly(Player play, CardInfo cardInfo)
-        {
-            if(play.data.stats.GetAdditionalData().CommonOnly)
-            {
-                return (RarityUtils.GetRarityData(cardInfo.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity);
-            }
-            return true;
-        }
         IEnumerator PointEnd(IGameModeHandler gm)
         {
             foreach (var player in PlayerManager.instance.players)
             {
+                
                 player.data.stats.GetAdditionalData().firstHit = true;
                 player.data.stats.GetAdditionalData().firstDamage = true;
                 //player.data.stats.GetAdditionalData().damageMult = player.data.stats.GetAdditionalData().damageMultMax;
-            }
-            yield break;
-        }
-        IEnumerator ExtraPicks()
-        {
-            foreach (Player player in PlayerManager.instance.players.ToArray())
-            {
-
-                while (player.data.stats.GetAdditionalData().shuffles > 0)
-                {
-                    player.data.stats.GetAdditionalData().shuffles -= 1;
-                    yield return GameModeManager.TriggerHook(GameModeHooks.HookPlayerPickStart);
-                    CardChoiceVisuals.instance.Show(Enumerable.Range(0, PlayerManager.instance.players.Count).Where(i => PlayerManager.instance.players[i].playerID == player.playerID).First(), true);
-                    yield return CardChoice.instance.DoPick(1, player.playerID, PickerType.Player);
-                    yield return new WaitForSecondsRealtime(0.1f);
-                    yield return GameModeManager.TriggerHook(GameModeHooks.HookPlayerPickEnd);
-                    yield return new WaitForSecondsRealtime(0.1f);
-                }
-                player.data.stats.GetAdditionalData().CommonOnly = true;
-                while (player.data.stats.GetAdditionalData().CommonShuffle > 0)
-                {
-                    player.data.stats.GetAdditionalData().CommonShuffle -= 1;
-                    yield return GameModeManager.TriggerHook(GameModeHooks.HookPlayerPickStart);
-                    CardChoiceVisuals.instance.Show(Enumerable.Range(0, PlayerManager.instance.players.Count).Where(i => PlayerManager.instance.players[i].playerID == player.playerID).First(), true);
-                    yield return CardChoice.instance.DoPick(1, player.playerID, PickerType.Player);
-                    yield return new WaitForSecondsRealtime(0.1f);
-                    yield return GameModeManager.TriggerHook(GameModeHooks.HookPlayerPickEnd);         
-                    yield return new WaitForSecondsRealtime(0.1f);
-                }
-            }
-            yield break;
-        }
-
-        IEnumerator RegainStuff()
-        {
-            foreach (Player player in PlayerManager.instance.players.ToArray())
-            {
-                player.data.stats.GetAdditionalData().CommonShuffle = player.data.stats.GetAdditionalData().CommonShufflePerPick;
-                player.data.stats.GetAdditionalData().shuffles = player.data.stats.GetAdditionalData().ShufflesPerPick;
-                player.data.stats.GetAdditionalData().CommonOnly = false;
             }
             yield break;
         }

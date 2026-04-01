@@ -35,7 +35,7 @@ namespace CPCClassic
         {
             private const string ModId = "com.Poppycars.CPCClassic.Id";
             private const string ModName = "ChaosPoppycarsCardsClassic";
-            public const string Version = "1.0.0"; // What version are we on (major.minor.patch)?
+            public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
             public const string ModInitials = "CPCClassic";
             internal static List<BaseUnityPlugin> plugins;
             public static ChaosPoppycarsCardsClassic Instance { get; private set; }

@@ -20,13 +20,15 @@ namespace CPCComplex.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            statModifiers.health = 1.5f;
+            statModifiers.regen = 10;
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            characterStats.GetAdditionalData().cursorFear -= 10;
+            characterStats.GetAdditionalData().ExtraHeal += 0.25f;
+            characterStats.GetAdditionalData().cursorFear -= 15;
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
         }
@@ -56,7 +58,27 @@ namespace CPCComplex.Cards
         {
             return new CardInfoStat[]
             {
-
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Health",
+                    amount = "+50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Regen",
+                    amount = "+10",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Healing",
+                    amount = "+25%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

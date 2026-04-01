@@ -12,10 +12,10 @@ namespace CPCComplex.Cards
         {
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             cardInfo.allowMultiple = true;
-            
-            //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
-           
 
+            //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
+            gun.damage = 0.75f;
+            gun.ammo = -2;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -52,7 +52,20 @@ namespace CPCComplex.Cards
         {
             return new CardInfoStat[]
             {
-                
+                new CardInfoStat()
+               {
+                    positive = false,
+                    stat = "Damage",
+                    amount = "-25%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+               },
+                new CardInfoStat()
+               {
+                    positive = false,
+                    stat = "Ammo",
+                    amount = "-2",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+               }
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

@@ -13,6 +13,8 @@ using Photon.Realtime;
 using CPCCore.Utilities;
 using CardChoiceSpawnUniqueCardPatch.CustomCategories;
 using ModdingUtils.Extensions;
+using MapEmbiggener.Controllers;
+using MapEmbiggener.Controllers.Default;
 
 namespace CPCCore.Cards
 {
@@ -29,6 +31,8 @@ namespace CPCCore.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            
+
             ChaosPoppycarsCardsCore.Instance.ExecuteAfterFrames(10, () => {
                 //var scarce = ModdingUtils.Utils.Cards.instance.GetRandomCardWithCondition(player, gun, gunAmmo, data, health, gravity, block, characterStats, ScarceCondition);
                 var scarce = ModdingUtils.Utils.Cards.instance.DrawRandomCardWithCondition(ModdingUtils.Utils.Cards.instance.HiddenCards.ToArray(), player, gun, gunAmmo, data, health, gravity, block, characterStats, ScarceCondition);

@@ -1,4 +1,11 @@
-﻿using System;
+﻿using BepInEx;
+using CardChoiceSpawnUniqueCardPatch.CustomCategories;
+using CPCComplex.MonoBehaviours;
+using CPCCore.Extensions;
+using CPCCore.Utilities;
+using HarmonyLib;
+using RarityLib.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +13,7 @@ using System.Threading.Tasks;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
-using BepInEx;
-using CPCCore.Utilities;
-using HarmonyLib;
-using CardChoiceSpawnUniqueCardPatch.CustomCategories;
-using RarityLib.Utils;
-using CPCComplex.MonoBehaviours;
-using CPCCore.Extensions;
+using WillsWackyManagers.Utils;
 
 namespace CPCComplex.Cards
 {
@@ -20,20 +21,23 @@ namespace CPCComplex.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            cardInfo.categories = new CardCategory[] { CustomCardCategories.instance.CardCategory("cantEternity") };
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            if(DrawNCards.DrawNCards.GetPickerDraws(player.playerID) <= 28)
-                DrawNCards.DrawNCards.SetPickerDraws(player.playerID, DrawNCards.DrawNCards.GetPickerDraws(player.playerID) + 2);
-            characterStats.GetAdditionalData().shuffles += 1;
+            DrawNCards.DrawNCards.SetPickerDraws(player.playerID, DrawNCards.DrawNCards.GetPickerDraws(player.playerID) + 2);
+            /*if (CardChoice.instance.pickerType != 0 && player.playerID == CardChoice.instance.pickrID)
+            {
+                CardChoice.instance.picks++;
+            }*/
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+                DrawNCards.DrawNCards.SetPickerDraws(player.playerID, DrawNCards.DrawNCards.GetPickerDraws(player.playerID) - 2);
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
         }
@@ -52,7 +56,7 @@ namespace CPCComplex.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return RarityUtils.GetRarity("Epic");
+            return RarityUtils.GetRarity("Rare");
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -76,7 +80,7 @@ namespace CPCComplex.Cards
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.ColdBlue;
+            return CardThemeColor.CardThemeColorType.MagicPink;
         }
         public override string GetModName()
         {

@@ -1,24 +1,24 @@
-﻿using System;
+﻿using BepInEx;
+using CPCCore;
+using CPCCore.Utilities;
+using Nullmanager;
+using Photon.Pun;
+using Photon.Realtime;
+using RarityLib.Utils;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using UnboundLib;
 using UnboundLib.Cards;
-using UnityEngine;
-using Photon.Pun;
-using BepInEx;
-using UnboundLib.Utils;
-using WillsWackyManagers.Utils;
-using RarityLib.Utils;
-using Nullmanager;
-using System.Collections;
 using UnboundLib.GameModes;
-using System.Numerics;
+using UnboundLib.Utils;
 using UnityEditor;
-using Photon.Realtime;
-using CPCCore.Utilities;
-using CPCCore;
+using UnityEngine;
+using WillsWackyManagers.Utils;
 
 
 namespace CPCComplex.Cards
@@ -31,6 +31,7 @@ namespace CPCComplex.Cards
         }
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
+            ModdingUtils.Extensions.CardInfoExtension.GetAdditionalData(cardInfo).canBeReassigned = false;
             cardInfo.categories = new CardCategory[] { ChaosPoppycarsCardsCore.CPCCoreCardCategories.PoppysChaosCategory };
             CPCDebug.Log($"[{ChaosPoppycarsCardsCore.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`

@@ -46,6 +46,4 @@ MonoBehaviour:
   Cards:
   - {fileID: 1043437007509817, guid: b3e75ced23ee53b4fab61917b0c670fa, type: 3}
   - {fileID: 1043437007509817, guid: 053590194df5a34469669b21a9e58682, type: 3}
-  - {fileID: 1043437007509817, guid: f03917d5ad09d9246b02b38a64d0a1cf, type: 3}
-  - {fileID: 1043437007509817, guid: a260dc03740e6a941b0c52e53b74156d, type: 3}
   HiddenCards: []

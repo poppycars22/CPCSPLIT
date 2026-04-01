@@ -36,7 +36,7 @@ namespace CPCCurses
     {
         private const string ModId = "com.Poppycars.CPCCurses.Id";
         private const string ModName = "ChaosPoppycarsCardsCurses";
-        public const string Version = "1.0.0"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCurses";
         internal static List<BaseUnityPlugin> plugins;
         public static ChaosPoppycarsCardsCurses Instance { get; private set; }

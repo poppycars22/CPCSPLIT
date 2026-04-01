@@ -49,4 +49,7 @@ MonoBehaviour:
   - {fileID: 1043437007509817, guid: f9d4299d987aeb74fa166dea9449dfc8, type: 3}
   - {fileID: 1043437007509817, guid: 0c57140fa5928ef4082bedc70140b14e, type: 3}
   - {fileID: 1043437007509817, guid: 0ac48e3d976e49941a58e1cf951ff58e, type: 3}
+  - {fileID: 1043437007509817, guid: 109c9b079b75f0d4da86c7eee535addb, type: 3}
+  - {fileID: 1043437007509817, guid: f03917d5ad09d9246b02b38a64d0a1cf, type: 3}
+  - {fileID: 1043437007509817, guid: a260dc03740e6a941b0c52e53b74156d, type: 3}
   HiddenCards: []

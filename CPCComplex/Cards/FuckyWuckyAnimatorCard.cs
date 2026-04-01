@@ -12,7 +12,7 @@ using HarmonyLib;
 using CardChoiceSpawnUniqueCardPatch.CustomCategories;
 using RarityLib.Utils;
 using CPCComplex.MonoBehaviours;
-using CPCCore.Extensions;
+using PSA.Extensions;
 
 namespace CPCComplex.Cards
 {
@@ -20,13 +20,18 @@ namespace CPCComplex.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-
+            cardInfo.allowMultiple = false;
+            statModifiers.numberOfJumps = 2;
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            var mono = player.gameObject.GetOrAddComponent<Animator>();
+            if (characterStats.GetAdditionalData().damageReductionFlat < 0.8f)
+            {
+                characterStats.GetAdditionalData().damageReductionFlat += 0.2f;
+            }
+                var mono = player.gameObject.GetOrAddComponent<Animator>();
             mono.runtimeAnimatorController = ChaosPoppycarsCardsComplex.Bundle.LoadAsset<RuntimeAnimatorController>("PlayerAnimatorSpeed");
             mono.speed = 0.35f;
             //a.player = player;
@@ -43,11 +48,11 @@ namespace CPCComplex.Cards
 
         protected override string GetTitle()
         {
-            return "Fucky Wucky Animation Card";
+            return "Set Speed";
         }
         protected override string GetDescription()
         {
-            return "Your movement speed is on a unity animator, enjoy!";
+            return "Your movement speed goes between 5 and -5";
         }
         protected override GameObject GetCardArt()
         {
@@ -61,7 +66,20 @@ namespace CPCComplex.Cards
         {
             return new CardInfoStat[]
             {
-
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Jumps",
+                    amount = "+2",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Damage Reduction",
+                    amount = "+20%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()

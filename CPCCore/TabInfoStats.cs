@@ -9,6 +9,7 @@ namespace CPCTabInfoSTATS
         {
             var OtherStats = TabInfoManager.RegisterCategory("Other Stats", 0);
             TabInfoManager.RegisterStat(OtherStats, "Max Dashes", (p) => p.data.stats.GetAdditionalData().dashes != 0, (p) => string.Format("{0:F0}", p.data.stats.GetAdditionalData().dashes));
+            TabInfoManager.RegisterStat(OtherStats, "Extra Healing", (p) => p.data.stats.GetAdditionalData().ExtraHeal != 1, (p) => string.Format("{0:F0}%", (p.data.stats.GetAdditionalData().ExtraHeal-1f)*100));
             TabInfoManager.RegisterStat(OtherStats, "Blocks are", (p) => p.data.stats.GetAdditionalData().blockMover && !p.data.stats.GetAdditionalData().blockPush, (p) => "pulling");
             TabInfoManager.RegisterStat(OtherStats, "Blocks <b>are</b>", (p) => p.data.stats.GetAdditionalData().blockMover && p.data.stats.GetAdditionalData().blockPush, (p) => "pushing");
             var MCStats = TabInfoManager.RegisterCategory("Minecraft Stats", 1);
