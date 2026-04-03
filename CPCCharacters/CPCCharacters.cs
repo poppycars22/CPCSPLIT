@@ -38,7 +38,7 @@ namespace CPCCharacters
     {
         private const string ModId = "com.Poppycars.CPCCharacters.Id";
         private const string ModName = "ChaosPoppycarsCardsCharacters";
-        public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.3"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCharacters";
         internal static List<BaseUnityPlugin> plugins;
         public static ChaosPoppycarsCardsCharacters Instance { get; private set; }

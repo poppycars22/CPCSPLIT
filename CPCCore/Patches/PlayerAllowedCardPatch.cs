@@ -20,7 +20,7 @@ namespace CPCCore.Patches
         // patch for Mcnally
         private static void Postfix(ModdingUtils.Utils.Cards __instance, ref bool __result, Player player, CardInfo card)
         {
-            if(card != null)
+            if(card != null && player != null)
             {
                 if (player.data.stats.GetAdditionalData().Mcnally)
                 {
