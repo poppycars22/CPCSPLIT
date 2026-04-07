@@ -27,7 +27,6 @@ namespace CPCCore.Extensions
         public bool InvisPot;
         public bool healthCase;
         public bool blockCase;
-        public bool everyOther;
         public bool firstHit;
         public float damageMult;
         public float damageMultMax;
@@ -88,7 +87,6 @@ namespace CPCCore.Extensions
             InvisPot = false;
             healthCase = false;
             blockCase = false;
-            everyOther = true;
             firstHit = true;
             firstHitdmgReduction = 1f;
             firstDamage = true;
@@ -173,7 +171,6 @@ namespace CPCCore.Extensions
             __instance.GetAdditionalData().InvisPot = false;
             __instance.GetAdditionalData().healthCase = false;
             __instance.GetAdditionalData().blockCase = false;
-            __instance.GetAdditionalData().everyOther = true;
             __instance.GetAdditionalData().firstHit = true;
             __instance.GetAdditionalData().firstHitdmgReduction = 1f;
             __instance.GetAdditionalData().firstDamage = true;

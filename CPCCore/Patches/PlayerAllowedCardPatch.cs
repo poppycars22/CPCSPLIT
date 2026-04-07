@@ -5,9 +5,11 @@ using HarmonyLib;
 using ModdingUtils.Patches;
 using ModdingUtils.Utils;
 using Photon.Pun;
+using PickPhaseImprovements;
 using System;
 using System.Linq;
 using UnityEngine;
+using static PickPhaseImprovements.PickManager;
 
 
 namespace CPCCore.Patches
@@ -40,7 +42,8 @@ namespace CPCCore.Patches
             {
                 //CardInfo[] cards = __instance.activeCards.AddRangeToArray(ModdingUtils.Utils.Cards.instance.HiddenCards.Where(c => ((DefaultPool)PhotonNetwork.PrefabPool).ResourceCache.ContainsKey(c.name)).ToArray()).Where(card => condition(card, player, gun, gunAmmo, data, health, gravity, block, characterStats)).ToArray();
                 CardInfo[] cards = __instance.activeCards.Where(card => condition(card, player, gun, gunAmmo, data, health, gravity, block, characterStats) && __instance.PlayerIsAllowedCard(player, card)).ToArray();
-                cards.AddRangeToArray(__instance.HiddenCards.Where(card => condition(card, player, gun, gunAmmo, data, health, gravity, block, characterStats) && ((DefaultPool)PhotonNetwork.PrefabPool).ResourceCache.ContainsKey(card.name)).ToArray());
+                cards = cards.AddRangeToArray(__instance.HiddenCards.Where(card => condition(card, player, gun, gunAmmo, data, health, gravity, block, characterStats) && ((DefaultPool)PhotonNetwork.PrefabPool).ResourceCache.ContainsKey(card.name)).ToArray());
+                cards = cards.AddItem(CardChoiceSpawnUniqueCardPatch.CardChoiceSpawnUniqueCardPatch.NullCard).ToArray();
                 if (cards.Length == 0)
                 {
                     __result = null;
@@ -53,6 +56,43 @@ namespace CPCCore.Patches
                 }
             }
             return true;
+        }
+    }
+
+    [Serializable]
+    [HarmonyPatch(typeof(ModdingUtils.Utils.Cards), "GetAllCardsWithCondition", new Type[] {typeof(CardChoice), typeof(Player), typeof(Func<CardInfo, Player, bool>)})]
+    class PlayerAllowedHiddenCardPatch
+    {
+        public static bool Prefix(ModdingUtils.Utils.Cards __instance, ref CardInfo[] __result, Player player)
+        {
+            if(player != null && player.data.stats.GetAdditionalData().Mcnally)
+            {
+                UnityEngine.Debug.Log(__instance.activeCards.Length);
+                CardInfo[] cards = __instance.activeCards;
+                cards = cards.AddRangeToArray(__instance.HiddenCards.Where(card => ((DefaultPool)PhotonNetwork.PrefabPool).ResourceCache.ContainsKey(card.name)).ToArray());
+                cards = cards.AddItem(CardChoiceSpawnUniqueCardPatch.CardChoiceSpawnUniqueCardPatch.NullCard).ToArray();
+                __result = cards;
+                return false;
+            }
+            return true;
+        }
+    }
+    [Serializable]
+    [HarmonyPatch(typeof(PickPhaseImprovements.PickManager), "RegisterDrawValidationFunction")]
+    class ValidationPatch
+    {
+        public static bool Prefix(Func<CardInfo[], CardInfo, ValidationResult> func)
+        {
+            DrawValidationFunctions.Add((h, c) =>
+            {
+                if (CardChoice.instance.pickrID >= 0 && CardChoice.instance.pickerType != PickerType.Team)
+                {
+                    if (PlayerManager.instance.GetPlayerWithID(CardChoice.instance.pickrID).data.stats.GetAdditionalData().Mcnally)
+                        return ValidationResult.Valid;
+                }
+                return func.Invoke(h, c);
+            });
+            return false;
         }
     }
 }

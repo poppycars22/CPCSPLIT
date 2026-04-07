@@ -40,7 +40,7 @@ namespace CPCCrafter
     {
         private const string ModId = "com.Poppycars.CPCCrafter.Id";
         private const string ModName = "ChaosPoppycarsCardsCrafter";
-        public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCrafter";
         internal static List<BaseUnityPlugin> plugins;
         public static ChaosPoppycarsCardsCrafter Instance { get; private set; }

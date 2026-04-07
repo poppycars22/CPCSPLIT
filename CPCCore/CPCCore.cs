@@ -49,6 +49,7 @@ namespace CPCCore
     [BepInDependency("com.willuwontu.rounds.tabinfo", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.rsmind.rounds.fancycardbar", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("pykess.rounds.plugins.mapembiggener", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("Systems.R00t.PickPhaseImprovements", BepInDependency.DependencyFlags.HardDependency)]
     // Declares our mod to Bepin
     [BepInPlugin(ModId, ModName, Version)]
 
@@ -58,7 +59,7 @@ namespace CPCCore
     {
         private const string ModId = "com.Poppycars.CPCCore.Id";
         private const string ModName = "ChaosPoppycarsCardsCore";
-        public const string Version = "1.0.5"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.6"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCore";
         public static Harmony harmony;
         internal static List<BaseUnityPlugin> plugins;
@@ -167,10 +168,25 @@ namespace CPCCore
             //GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, (gm) => ExtraPicks());
             //  GameModeManager.AddHook(GameModeHooks.HookBattleStart, LightSaberRangeReset);
             // make cards mutually exclusive
-            this.ExecuteAfterFrames(10, () =>
-            {
+                /*var original = typeof(CardChoice).GetMethod("SpawnUniqueCard");
 
-            });
+                // retrieve all patches
+                var patches = Harmony.GetPatchInfo(original);
+                if (patches is null) UnityEngine.Debug.Log("patches null");  // not patched
+
+                // get a summary of all different Harmony ids involved
+                UnityEngine.Debug.Log("all owners: " + patches.Owners);
+
+                // get info about all Prefixes/Postfixes/Transpilers
+                foreach (var patch in patches.Prefixes)
+                {
+                    UnityEngine.Debug.Log("index: " + patch.index);
+                    UnityEngine.Debug.Log("owner: " + patch.owner);
+                    UnityEngine.Debug.Log("patch method: " + patch.PatchMethod);
+                    UnityEngine.Debug.Log("priority: " + patch.priority);
+                    UnityEngine.Debug.Log("before: " + patch.before);
+                    UnityEngine.Debug.Log("after: " + patch.after);
+                }*/
             ExtensionMethods.ExecuteAfterFrames(this, 60, delegate ()
             {
                 Enumerable.ToList<Card>(CardManager.cards.Values).ForEach(delegate (Card card)

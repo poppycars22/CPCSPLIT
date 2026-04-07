@@ -4,6 +4,7 @@ using UnboundLib;
 using UnboundLib.Utils;
 using UnityEngine;
 using System.Reflection;
+using CPCCore.MonoBehaviours;
 
 
 namespace CPCCore.Patches
@@ -15,9 +16,9 @@ namespace CPCCore.Patches
         static readonly PlayerSkin PoppySkin = new PlayerSkin
         {
             color = new Color(1f*0.75f, 0.835f*0.6f, 0f, 0.75f),
-            backgroundColor = new Color(1f,0.835f,0f, 0.75f),
+            backgroundColor = new Color(1f*0.75f,0.835f*0.75f,0f, 0.75f),
             winText = new Color(1f * 0.75f, 0.835f *0.6f, 0f, 0.5f),
-            particleEffect = new Color(1f * 0.75f, 0.835f*0.6f, 0f, 0.75f)
+            particleEffect = new Color(1f * 0.75f, 0.835f*0.6f, 0f, 0f)
         };
         const int TeamID = 68;
         [HarmonyPatch(nameof(ExtraPlayerSkins.GetTeamColorName))]

@@ -87,8 +87,7 @@ namespace CPCCrafter.Cards
         {
             foreach (Player player in PlayerManager.instance.players.ToArray())
             {
-                player.data.stats.GetAdditionalData().everyOther = !(player.data.stats.GetAdditionalData().everyOther);
-                if (player.data.stats.GetAdditionalData().everyOther == false && player.data.currentCards.Contains(AutoCrafter.Card))
+                if (player.data.currentCards.Contains(AutoCrafter.Card))
                 {
                     if (ModdingUtils.Utils.Cards.instance.PlayerIsAllowedCard(player, StoneSword.Card))
                     {
@@ -118,7 +117,7 @@ namespace CPCCrafter.Cards
         {
             foreach (Player player in PlayerManager.instance.players.ToArray())
             {
-                if (player.data.stats.GetAdditionalData().everyOther == false && player.data.currentCards.Contains(AutoCrafter.Card))
+                if (player.data.currentCards.Contains(AutoCrafter.Card))
                 {
 
                     if (ModdingUtils.Utils.Cards.instance.PlayerIsAllowedCard(player, StoneHoe.Card))
@@ -149,7 +148,7 @@ namespace CPCCrafter.Cards
         {
             foreach (Player player in PlayerManager.instance.players.ToArray())
             {
-                if (player.data.stats.GetAdditionalData().everyOther == false && player.data.currentCards.Contains(AutoCrafter.Card))
+                if (player.data.currentCards.Contains(AutoCrafter.Card))
                 {
                     if (ModdingUtils.Utils.Cards.instance.PlayerIsAllowedCard(player, StoneAxe.Card))
                     {
@@ -179,7 +178,7 @@ namespace CPCCrafter.Cards
         {
             foreach (Player player in PlayerManager.instance.players.ToArray())
             {
-                if (player.data.stats.GetAdditionalData().everyOther == false && player.data.currentCards.Contains(AutoCrafter.Card))
+                if (player.data.currentCards.Contains(AutoCrafter.Card))
                 {
                     if (ModdingUtils.Utils.Cards.instance.PlayerIsAllowedCard(player, ChainArmor.Card))
                     {

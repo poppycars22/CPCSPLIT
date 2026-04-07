@@ -30,7 +30,8 @@
         "PSA.dll",
         "PlayerActionsHelper.dll",
         "PlayerTimeScale.dll",
-        "MapEmbiggener.dll"
+        "MapEmbiggener.dll",
+        "PickPhaseImprovements.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": []
