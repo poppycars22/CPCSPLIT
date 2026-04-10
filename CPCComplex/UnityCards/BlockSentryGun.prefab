@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 114193385136356738}
   - component: {fileID: 114467370981366434}
   - component: {fileID: 114071761338886618}
+  - component: {fileID: 114743276207062684}
   m_Layer: 0
   m_Name: BlockSentryGun
   m_TagString: Untagged
@@ -328,3 +329,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: 67aaf3cb8c2e3f14fbdf9f7f417a0acf,
     type: 3}
+--- !u!114 &114743276207062684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Complex
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

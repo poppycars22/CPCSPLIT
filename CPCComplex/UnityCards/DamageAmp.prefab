@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 114997074887337774}
   - component: {fileID: 114969577739340399}
   - component: {fileID: 114193385136356738}
-  - component: {fileID: 114842370407692342}
+  - component: {fileID: 114638617926538990}
   m_Layer: 0
   m_Name: DamageAmp
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MonoBehaviour:
   cardDestription: Gain +5 Damage dealt every point
   cardStats: []
   rarity: 0
-  cardArt: {fileID: 4518639248861438065, guid: ef71043819092414b91ca9d95f24393f, type: 3}
+  cardArt: {fileID: 0}
   sprite: {fileID: 21300000, guid: 5b742d082ddefaa489468fac5e1e3bff, type: 2}
   sourceCard: {fileID: 0}
   cardColor: {r: 0.10568709, g: 0.18812303, b: 0.23584908, a: 1}
@@ -297,7 +297,7 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &114842370407692342
+--- !u!114 &114638617926538990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,8 +306,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1043437007509817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6984fbfec9ffb42910fcec93904b85, type: 3}
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fancyIcon: {fileID: 1790492772407996393, guid: 633b808818114294f9fd152f98988eca,
-    type: 3}
+  sourceType: 0
+  categoryPath: Complex
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

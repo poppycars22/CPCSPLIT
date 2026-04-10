@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 114193385136356738}
   - component: {fileID: 114767065466671498}
   - component: {fileID: 114274248617976306}
+  - component: {fileID: 114958771944822642}
   m_Layer: 0
   m_Name: StrengthPotion
   m_TagString: Untagged
@@ -328,3 +329,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: 02382bb80ec94c448b851e1a392e8211,
     type: 3}
+--- !u!114 &114958771944822642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Classes/Crafter/Potion
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

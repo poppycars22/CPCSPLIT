@@ -31,7 +31,9 @@
         "PlayerActionsHelper.dll",
         "PlayerTimeScale.dll",
         "MapEmbiggener.dll",
-        "PickPhaseImprovements.dll"
+        "PickPhaseImprovements.dll",
+        "ToggleCardsCategories.dll",
+        "RoundsWithFriends.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": []

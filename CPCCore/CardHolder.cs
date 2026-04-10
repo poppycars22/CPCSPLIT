@@ -1,9 +1,11 @@
-﻿using UnityEngine;
-using BepInEx;
+﻿using BepInEx;
+using CPCCardInfostuffs;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using UnboundLib;
 using UnboundLib.Cards;
-using System.Collections.Generic;
-using CPCCardInfostuffs;
+using UnityEngine;
 
 namespace CPCCore
 {
@@ -14,8 +16,10 @@ namespace CPCCore
 
         public void RegisterCards()
         {
+            //string modInitials = (string)new StackTrace().GetFrame(1).GetMethod().ReflectedType.GetField("ModInitials", BindingFlags.Static | BindingFlags.Public).GetValue(null);
             foreach (var Card in Cards)
             {
+                //CustomCard.RegisterUnityCard(Card, $"CPC ({modInitials})", Card.GetComponent<CardInfo>().cardName, true, null);
                 if (Card.gameObject.GetComponent<CPCCardInfo>() == null)
                 {
                     CustomCard.RegisterUnityCard(Card, "CPC", Card.GetComponent<CardInfo>().cardName, true, null);

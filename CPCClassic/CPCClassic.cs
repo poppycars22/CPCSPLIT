@@ -35,7 +35,7 @@ namespace CPCClassic
         {
             private const string ModId = "com.Poppycars.CPCClassic.Id";
             private const string ModName = "ChaosPoppycarsCardsClassic";
-            public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
+            public const string Version = "1.0.3"; // What version are we on (major.minor.patch)?
             public const string ModInitials = "CPCClassic";
             internal static List<BaseUnityPlugin> plugins;
             public static ChaosPoppycarsCardsClassic Instance { get; private set; }
@@ -43,6 +43,7 @@ namespace CPCClassic
             public static AssetBundle Bundle = null;
             void Awake()
             {
+                Instance = this;
                 Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpcclassic", typeof(ChaosPoppycarsCardsClassic).Assembly);
 
                 var harmony = new Harmony(ModId);
@@ -61,7 +62,6 @@ namespace CPCClassic
             private void Start()
             {
                 plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-                Instance = this;
                 ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsClassic).Assembly, Bundle);
                 
 

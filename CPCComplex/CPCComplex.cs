@@ -46,7 +46,7 @@ namespace CPCComplex
         {
             private const string ModId = "com.Poppycars.CPCComplex.Id";
             private const string ModName = "ChaosPoppycarsCardsComplex";
-            public const string Version = "1.0.3"; // What version are we on (major.minor.patch)?
+            public const string Version = "1.0.4"; // What version are we on (major.minor.patch)?
             public const string ModInitials = "CPCComplex";
             internal static List<BaseUnityPlugin> plugins;
             public static ChaosPoppycarsCardsComplex Instance { get; private set; }
@@ -54,6 +54,7 @@ namespace CPCComplex
             public static AssetBundle Bundle = null;
             void Awake()
             {
+                Instance = this;
                 Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpccomplex", typeof(ChaosPoppycarsCardsComplex).Assembly);
 
                 RarityLib.Utils.RarityUtils.AddRarity("Geese", 1f, new Color32(172, 172, 172, 255), new Color32(60, 60, 60, 255));
@@ -88,38 +89,23 @@ namespace CPCComplex
             private void Start()
             {
                 plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-                Instance = this;
                 GameModeManager.AddHook(GameModeHooks.HookGameStart, this.GameStart);
                 ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsComplex).Assembly, Bundle);
 
                 ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => !cardinfo.rarity.Equals(RarityLib.Utils.RarityUtils.GetRarity("Geese")) || PlayerManager.instance.players.Any(p => player.teamID != p.teamID && p.data.currentCards.Contains(GeeseSwarm.Card)));
-                
+                ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => ExpansionCheck(player, cardinfo));
 
-                ExtensionMethods.ExecuteAfterFrames(this, 60, delegate ()
-                {
-                        Enumerable.ToList<Card>(CardManager.cards.Values).ForEach(delegate (Card card)
-                        {
-                            this.AddMod(card);
-                        });
-                });
             }
             
-        public bool ExpansionCheck(Player player, CardInfo card)
-        {
-            if (!card.name.Equals("__CPC__Expansion"))
-                    return true;
-            float map = 0;
-            foreach (Player play in PlayerManager.instance.players)
-                map += player.data.stats.GetAdditionalData().mapSizeI;
-            map += MapEmbiggener.MapEmbiggener.setSize;
-            return map + 0.5f <= 7;
-        }
-            private void AddMod(Card card)
+            public bool ExpansionCheck(Player player, CardInfo card)
             {
-                string text = "__Rarity-" + card.cardInfo.rarity;
-                CardCategory cardCategory = CustomCardCategories.instance.CardCategory(text);
-                CardCategory[] categories = CollectionExtensions.AddToArray<CardCategory>(card.cardInfo.categories, cardCategory);
-                card.cardInfo.categories = categories;
+                if (!card.name.Equals("__CPC__Expansion"))
+                    return true;
+                float map = 0;
+                foreach (Player play in PlayerManager.instance.players)
+                    map += player.data.stats.GetAdditionalData().mapSizeI;
+                map += MapEmbiggener.MapEmbiggener.setSize;
+                return map + 0.5f <= 7;
             }
 
             IEnumerator GameStart(IGameModeHandler gm)

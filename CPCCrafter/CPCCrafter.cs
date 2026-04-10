@@ -40,7 +40,7 @@ namespace CPCCrafter
     {
         private const string ModId = "com.Poppycars.CPCCrafter.Id";
         private const string ModName = "ChaosPoppycarsCardsCrafter";
-        public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.3"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCrafter";
         internal static List<BaseUnityPlugin> plugins;
         public static ChaosPoppycarsCardsCrafter Instance { get; private set; }
@@ -50,6 +50,7 @@ namespace CPCCrafter
         public static AssetBundle Bundle = null;
         void Awake()
         {
+            Instance = this;
             Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpccrafter", typeof(ChaosPoppycarsCardsCrafter).Assembly);
             var harmony = new Harmony(ModId);
             harmony.PatchAll();
@@ -63,7 +64,6 @@ namespace CPCCrafter
         private void Start()
         {
             plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-            Instance = this;
             ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsCrafter).Assembly, Bundle);
 
             ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => toolFunc(player, cardinfo));
@@ -74,13 +74,7 @@ namespace CPCCrafter
 
             GameModeManager.AddHook(GameModeHooks.HookRoundEnd, UpgradeAction);
 
-            ExtensionMethods.ExecuteAfterFrames(this, 60, delegate ()
-            {
-                Enumerable.ToList<Card>(CardManager.cards.Values).ForEach(delegate (Card card)
-                {
-                    this.AddMod(card);
-                });
-            });
+ 
         }
 
         private bool toolFunc(Player player, CardInfo cardInfo)
@@ -99,13 +93,6 @@ namespace CPCCrafter
                 }
             }
             return true;
-        }
-        private void AddMod(Card card)
-        {
-            string text = "__Rarity-" + card.cardInfo.rarity;
-            CardCategory cardCategory = CustomCardCategories.instance.CardCategory(text);
-            CardCategory[] categories = CollectionExtensions.AddToArray<CardCategory>(card.cardInfo.categories, cardCategory);
-            card.cardInfo.categories = categories;
         }
         private void NewGUI(GameObject menu)
         {

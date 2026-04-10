@@ -33,7 +33,7 @@ namespace CPCClasses
         {
             private const string ModId = "com.Poppycars.CPCClasses.Id";
             private const string ModName = "ChaosPoppycarsCardsClasses";
-            public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
+            public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
             public const string ModInitials = "CPCClasses";
             internal static List<BaseUnityPlugin> plugins;
             public static ChaosPoppycarsCardsClasses Instance { get; private set; }
@@ -41,6 +41,7 @@ namespace CPCClasses
             public static AssetBundle Bundle = null;
             void Awake()
             {
+                Instance = this;
                 Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpcclasses", typeof(ChaosPoppycarsCardsClasses).Assembly);
                 var harmony = new Harmony(ModId);
                 harmony.PatchAll();
@@ -53,7 +54,6 @@ namespace CPCClasses
             private void Start()
             {
                 plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-                Instance = this;
                 ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsClasses).Assembly, Bundle);
                 
 

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 114193385136356738}
   - component: {fileID: 114932920058046092}
   - component: {fileID: 114667006633980524}
+  - component: {fileID: 114770883835353314}
   m_Layer: 0
   m_Name: Shroom
   m_TagString: Untagged
@@ -329,3 +330,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: 598ddbe7998b1004e91dcb5af36b764b,
     type: 3}
+--- !u!114 &114770883835353314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Characters
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

@@ -15,8 +15,10 @@ using RarityLib.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using ToggleCardsCategories;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnboundLib.GameModes;
@@ -50,6 +52,7 @@ namespace CPCCore
     [BepInDependency("com.rsmind.rounds.fancycardbar", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("pykess.rounds.plugins.mapembiggener", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("Systems.R00t.PickPhaseImprovements", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.aalund13.rounds.toggle_cards_categories", BepInDependency.DependencyFlags.HardDependency)]
     // Declares our mod to Bepin
     [BepInPlugin(ModId, ModName, Version)]
 
@@ -59,7 +62,7 @@ namespace CPCCore
     {
         private const string ModId = "com.Poppycars.CPCCore.Id";
         private const string ModName = "ChaosPoppycarsCardsCore";
-        public const string Version = "1.0.6"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.7"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCore";
         public static Harmony harmony;
         internal static List<BaseUnityPlugin> plugins;
@@ -69,6 +72,7 @@ namespace CPCCore
 
         void Awake()
         {
+            Instance = this;
             Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpccore", typeof(ChaosPoppycarsCardsCore).Assembly);
 
             
@@ -98,11 +102,12 @@ namespace CPCCore
             //TESTIG2.RegisterCards();
 
             //Bundle.LoadAllAssets();
-
+            ToggleCardsCategoriesManager.instance.RegisterCategories("CPC");
         }
         //REGISTER CURSES
         public static void RegisterCards(Assembly asemble, AssetBundle Bundle)
         {
+            //string modInitials = (string)new StackTrace().GetFrame(1).GetMethod().ReflectedType.GetField("ModInitials", BindingFlags.Static | BindingFlags.Public).GetValue(null);
             var assests = Bundle.LoadAllAssets<GameObject>();
             List<Type> types = asemble.GetTypes().Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(typeof(CustomCard))).ToList();
             foreach (var type in types)
@@ -120,6 +125,7 @@ namespace CPCCore
                         {
                             type.GetField("Card", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static).GetValue(null);
                             card.GetComponent<CustomCard>().BuildUnityCard(cardInfo => type.GetField("Card", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static).SetValue(null, cardInfo));
+                            //CardManager.cards[card.name].category = $"CPC ({modInitials})";
                         }
                         catch
                         {
@@ -149,10 +155,9 @@ namespace CPCCore
         private void Start()
         {
             plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-            Instance = this;
             GameModeManager.AddHook(GameModeHooks.HookGameStart, this.GameStart);
 
-
+            CardManager.categories.Add("CPC");
 
             if (plugins.Exists(plugin => plugin.Info.Metadata.GUID == "com.willuwontu.rounds.tabinfo"))
             {

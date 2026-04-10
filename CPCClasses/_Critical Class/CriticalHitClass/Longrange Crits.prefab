@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114981649233279504}
   - component: {fileID: 114728112251997686}
   - component: {fileID: 114918614562527824}
+  - component: {fileID: 114872098142360386}
   m_Layer: 0
   m_Name: Longrange Crits
   m_TagString: Untagged
@@ -400,3 +401,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: 904c4039857992a4199d20a26178b95f,
     type: 3}
+--- !u!114 &114872098142360386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Classes/Crit
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

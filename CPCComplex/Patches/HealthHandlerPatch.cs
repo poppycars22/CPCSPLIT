@@ -42,7 +42,7 @@ namespace CPCComplex.Patches
                 player.data.stats.GetAdditionalData().BlackHole = true;
                 Vector2 center = new Vector2(0, 0);
                 Vector2 playerpos = player.gameObject.transform.position;
-                damage /= (Mathf.Clamp((1/Mathf.Clamp(Vector2.Distance(center, playerpos),0.001f,9999)*10), 1, 10));
+                damage /= (Mathf.Clamp((1/Mathf.Clamp(Vector2.Distance(center, playerpos),0.001f,9999)*10), 1, 8));
             }
             return true;
         }

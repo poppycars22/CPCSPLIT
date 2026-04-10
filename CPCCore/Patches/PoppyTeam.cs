@@ -1,10 +1,13 @@
 ﻿using CPCCore.Extensions;
+using CPCCore.MonoBehaviours;
 using HarmonyLib;
+using System.Reflection;
+using TMPro;
 using UnboundLib;
+using UnboundLib.Extensions;
 using UnboundLib.Utils;
 using UnityEngine;
-using System.Reflection;
-using CPCCore.MonoBehaviours;
+using UnityEngine.UI.ProceduralImage;
 
 
 namespace CPCCore.Patches
@@ -12,13 +15,14 @@ namespace CPCCore.Patches
     [HarmonyPatch(typeof(ExtraPlayerSkins))]
     public class PoppyTeam
     {
+            
         static PlayerSkin Skin;
         static readonly PlayerSkin PoppySkin = new PlayerSkin
         {
-            color = new Color(1f*0.75f, 0.835f*0.6f, 0f, 0.75f),
-            backgroundColor = new Color(1f*0.75f,0.835f*0.75f,0f, 0.75f),
-            winText = new Color(1f * 0.75f, 0.835f *0.6f, 0f, 0.5f),
-            particleEffect = new Color(1f * 0.75f, 0.835f*0.6f, 0f, 0f)
+            color = new Color(1f * 0.75f, 0.835f * 0.6f, 0f, 0.75f),
+            backgroundColor = new Color(1f * 0.75f, 0.835f * 0.75f, 0f, 0.75f),
+            winText = new Color(1f * 0.75f, 0.835f * 0.6f, 0f, 0.5f),
+            particleEffect = new Color(1f * 0.75f, 0.835f * 0.6f, 0f, 0f)
         };
         const int TeamID = 68;
         [HarmonyPatch(nameof(ExtraPlayerSkins.GetTeamColorName))]
@@ -55,6 +59,25 @@ namespace CPCCore.Patches
             }
             __result = Skin;
             return false;
+        }
+        
+        [HarmonyPatch(typeof(RWF.CardBarHandlerExtensions), nameof(RWF.CardBarHandlerExtensions.Rebuild))]
+        [HarmonyPatch(typeof(CardBarHandlerExtensions), nameof(CardBarHandlerExtensions.Rebuild))]
+        [HarmonyPostfix]
+        public static void CardBarColor(CardBarHandler instance)
+        {
+            foreach (var cardBar in instance.cardBars)
+            {
+                var image = cardBar.transform.GetChild(0).GetChild(0).GetComponent<ProceduralImage>();
+                Color c = PoppySkin.backgroundColor;
+                if (image.color.Equals(new Color(c.r, c.g, c.b, 0.9f)))
+                {
+                    image.color = new Color(0f, 0f, 0f, 0f);
+                    var text = cardBar.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+                    text.outlineColor = new Color(1f, 1f, 0f);
+                    text.outlineWidth = 0.5f;
+                }
+            }
         }
     }
 }

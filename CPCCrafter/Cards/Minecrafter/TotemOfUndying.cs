@@ -12,6 +12,7 @@ namespace CPCCrafter.Cards
     public class TotemOfUndying : CustomCard
     {
         internal static CardInfo Card = null;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
             cardInfo.allowMultiple = true;

@@ -26,19 +26,19 @@ namespace CPCComplex.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             ModdingUtils.Extensions.CardInfoExtension.GetAdditionalData(cardInfo).canBeReassigned = false;
-            PickManager.RegisterShuffleCard(cardInfo, condition: card => RarityUtils.GetRarityData(card.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity);
+            PickManager.RegisterShuffleCard(cardInfo, 4, false, condition: card => !PickManager.IsShuffleCard(card) && (RarityUtils.GetRarityData(card.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity));
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            PickManager.GiveConditionalPick(player, condition: card => RarityUtils.GetRarityData(card.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity);
+            PickManager.GiveConditionalPick(player, 4, false, condition: card => !PickManager.IsShuffleCard(card) && (RarityUtils.GetRarityData(card.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity));
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             //Edits values on player when card is selected
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            PickManager.RemoveConditionalPick(player, new PickManager.ShuffleData() { Condition = card => RarityUtils.GetRarityData(card.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity, HandSize = 0, Relative = false });
+            PickManager.RemoveConditionalPick(player, new PickManager.ShuffleData() { Condition = card => !PickManager.IsShuffleCard(card) && (RarityUtils.GetRarityData(card.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity), HandSize = 4, Relative = false });
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
         }
@@ -49,7 +49,7 @@ namespace CPCComplex.Cards
         }
         protected override string GetDescription()
         {
-            return "Get an extra pick phase with only common (or lower) cards";
+            return "Get an extra pick with four common (or lower) cards";
         }
         protected override GameObject GetCardArt()
         {

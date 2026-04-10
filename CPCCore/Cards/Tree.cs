@@ -1,25 +1,24 @@
-﻿using System.Linq;
+﻿using CardChoiceSpawnUniqueCardPatch.CustomCategories;
+using CPCCore.Utilities;
+using ModdingUtils.Extensions;
+using Nullmanager;
+using Photon.Realtime;
+using RarityLib.Utils;
+using System.Collections;
+using System.Linq;
+using System.Numerics;
+using ToggleCardsCategories;
 using UnboundLib;
 using UnboundLib.Cards;
+using UnboundLib.GameModes;
+using UnityEditor;
 using UnityEngine;
 using WillsWackyManagers.Utils;
-using RarityLib.Utils;
-using Nullmanager;
-using System.Collections;
-using UnboundLib.GameModes;
-using System.Numerics;
-using UnityEditor;
-using Photon.Realtime;
-using CPCCore.Utilities;
-using CardChoiceSpawnUniqueCardPatch.CustomCategories;
-using ModdingUtils.Extensions;
 
 namespace CPCCore.Cards
 {
     class Tree : CustomCard
     {
-
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             CPCDebug.Log($"[{ChaosPoppycarsCardsCore.ModInitials}][Card] {GetTitle()} has been setup.");

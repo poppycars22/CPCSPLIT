@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114103698801039838}
   - component: {fileID: 114394958367637546}
   - component: {fileID: 114410727505558012}
+  - component: {fileID: 114361486194621902}
   m_Layer: 0
   m_Name: Block Reduction Crits
   m_TagString: Untagged
@@ -400,3 +401,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: a0465e1fda8e84f499b9e3519bc69d09,
     type: 3}
+--- !u!114 &114361486194621902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Classes/Crit
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

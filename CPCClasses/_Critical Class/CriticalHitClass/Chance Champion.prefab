@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114210049369930786}
   - component: {fileID: 114330103014690826}
   - component: {fileID: 114803116625904636}
+  - component: {fileID: 114800675275404118}
   m_Layer: 0
   m_Name: Chance Champion
   m_TagString: Untagged
@@ -404,3 +405,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: 224cc75a7445a374f99d79482f2d7cdc,
     type: 3}
+--- !u!114 &114800675275404118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Classes/Crit
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

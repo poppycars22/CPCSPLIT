@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 114193385136356738}
   - component: {fileID: 114682340070492408}
   - component: {fileID: 114463331287948702}
+  - component: {fileID: 114240808047005630}
   m_Layer: 0
   m_Name: Punch II
   m_TagString: Untagged
@@ -344,3 +345,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: 94eec51446174ae4b94b129e1fd21fb0,
     type: 3}
+--- !u!114 &114240808047005630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Classes/Crafter/Bow
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

@@ -36,7 +36,7 @@ namespace CPCCurses
     {
         private const string ModId = "com.Poppycars.CPCCurses.Id";
         private const string ModName = "ChaosPoppycarsCardsCurses";
-        public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.3"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCurses";
         internal static List<BaseUnityPlugin> plugins;
         public static ChaosPoppycarsCardsCurses Instance { get; private set; }
@@ -44,6 +44,7 @@ namespace CPCCurses
         public static AssetBundle Bundle = null;
         void Awake()
         {
+            Instance = this;
             Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpccurses", typeof(ChaosPoppycarsCardsCurses).Assembly);
 
             var harmony = new Harmony(ModId);
@@ -60,7 +61,6 @@ namespace CPCCurses
         private void Start()
         {
             plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-            Instance = this;
             ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsCurses).Assembly, Bundle);
 
             ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => player.data.currentCards.Where(C => C.GetComponent<LetterComponent>() != null).All(C => cardinfo.cardName.ToUpper().Contains(C.GetComponent<LetterComponent>().letter.ToUpper())) || cardinfo.categories.Contains(CPCCardCategories.IgnoreLetterCategory));
@@ -70,13 +70,6 @@ namespace CPCCurses
             //ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => !(cardinfo.GetComponent<LetterComponent>() is LetterComponent letterComponent) || (ModdingUtils.Utils.Cards.active.Any(c => player.data.currentCards.Where(C => C.GetComponent<LetterComponent>() != null).All(C => c.cardName.ToUpper().Contains(C.GetComponent<LetterComponent>().letter.ToUpper())) && c.cardName.ToUpper().Contains(letterComponent.letter.ToUpper()))));
             GameModeManager.AddHook(GameModeHooks.HookGameStart, this.GameStart);
 
-            ExtensionMethods.ExecuteAfterFrames(this, 60, delegate ()
-            {
-                Enumerable.ToList<Card>(CardManager.cards.Values).ForEach(delegate (Card card)
-                {
-                    this.AddMod(card);
-                });
-            });
         }
         bool Validation(Player player, CardInfo cardinfo)
         {
@@ -95,13 +88,6 @@ namespace CPCCurses
             }
 
             return ModdingUtils.Utils.Cards.active.Any(card => (!validLetters.Any(letter => (!card.cardName.ToUpper().Contains(letter)))));
-        }
-        private void AddMod(Card card)
-        {
-            string text = "__Rarity-" + card.cardInfo.rarity;
-            CardCategory cardCategory = CustomCardCategories.instance.CardCategory(text);
-            CardCategory[] categories = CollectionExtensions.AddToArray<CardCategory>(card.cardInfo.categories, cardCategory);
-            card.cardInfo.categories = categories;
         }
         IEnumerator GameStart(IGameModeHandler gm)
         {

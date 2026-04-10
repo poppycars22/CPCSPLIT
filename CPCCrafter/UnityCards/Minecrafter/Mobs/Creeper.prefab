@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 114163567212785646}
   - component: {fileID: 114555799055396822}
   - component: {fileID: 114529900001825762}
+  - component: {fileID: 114231374196749222}
   m_Layer: 0
   m_Name: Creeper
   m_TagString: Untagged
@@ -372,3 +373,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fancyIcon: {fileID: 1790492772407996393, guid: 845ec0e96ccf35a4fa2ac30496af7423,
     type: 3}
+--- !u!114 &114231374196749222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Classes/Crafter/Mobs
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

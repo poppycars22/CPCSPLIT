@@ -17,10 +17,11 @@ GameObject:
   - component: {fileID: 114997074887337774}
   - component: {fileID: 114969577739340399}
   - component: {fileID: 114193385136356738}
-  - component: {fileID: 114570025462988376}
-  - component: {fileID: 114067928825901370}
+  - component: {fileID: 114789487814861866}
+  - component: {fileID: 114269103885358934}
+  - component: {fileID: 114338948258702378}
   m_Layer: 0
-  m_Name: JumpShrink
+  m_Name: JumpBursts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +298,7 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &114570025462988376
+--- !u!114 &114789487814861866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,7 +307,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1043437007509817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e48c782e80e0b458446ceb6422982d, type: 3}
+  m_Script: {fileID: 11500000, guid: 777c000b1f071b5409b37ef0896bf7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardInfo: {fileID: 0}
@@ -314,7 +315,7 @@ MonoBehaviour:
   cardStats: {fileID: 0}
   statModifiers: {fileID: 0}
   block: {fileID: 0}
---- !u!114 &114067928825901370
+--- !u!114 &114269103885358934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,5 +327,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6984fbfec9ffb42910fcec93904b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fancyIcon: {fileID: 1790492772407996393, guid: fb96cb269824c5e46a65bd3c194eafff,
+  fancyIcon: {fileID: 1790492772407996393, guid: b7924a2ceb8fdba488d5a7da21a64dd6,
     type: 3}
+--- !u!114 &114338948258702378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -547354468, guid: a983b36da9e779c4b923af712288975b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceType: 0
+  categoryPath: Classic/Jump
+  CategoryPath: 
+  categoryAsset: {fileID: 0}
+  Priority: 0

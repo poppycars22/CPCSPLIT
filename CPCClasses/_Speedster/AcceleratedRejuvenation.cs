@@ -56,7 +56,7 @@ namespace CPCClasses.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return ChaosPoppycarsCardsClasses.Bundle.LoadAsset<GameObject>("C_TriggerFinger");
+            return ChaosPoppycarsCardsClasses.Bundle.LoadAsset<GameObject>("C_AcceleratedRejuvenation");
         }
         protected override CardInfo.Rarity GetRarity()
         {

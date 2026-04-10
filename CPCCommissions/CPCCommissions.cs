@@ -37,7 +37,7 @@ namespace CPCCommissions
     {
         private const string ModId = "com.Poppycars.CPCCommissions.Id";
         private const string ModName = "ChaosPoppycarsCardsCommissions";
-        public const string Version = "1.0.1"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.2"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCommissions";
         internal static List<BaseUnityPlugin> plugins;
         public static ChaosPoppycarsCardsCommissions Instance { get; private set; }
@@ -45,6 +45,7 @@ namespace CPCCommissions
         public static AssetBundle Bundle = null;
         void Awake()
         {
+            Instance = this;
             Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpccommissions", typeof(ChaosPoppycarsCardsCommissions).Assembly);
 
             var harmony = new Harmony(ModId);
@@ -61,7 +62,6 @@ namespace CPCCommissions
         private void Start()
         {
             plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-            Instance = this;
             ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsCommissions).Assembly, Bundle);
 
             GameModeManager.AddHook(GameModeHooks.HookGameStart, this.GameStart);

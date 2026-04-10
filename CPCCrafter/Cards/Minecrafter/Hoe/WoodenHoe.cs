@@ -23,7 +23,6 @@ namespace CPCCrafter.Cards
 
         internal static CardInfo Card = null;
 
-        static bool everyOtherRound2 = true;
 
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)

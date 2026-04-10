@@ -38,7 +38,7 @@ namespace CPCCharacters
     {
         private const string ModId = "com.Poppycars.CPCCharacters.Id";
         private const string ModName = "ChaosPoppycarsCardsCharacters";
-        public const string Version = "1.0.3"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.4"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCharacters";
         internal static List<BaseUnityPlugin> plugins;
         public static ChaosPoppycarsCardsCharacters Instance { get; private set; }
@@ -48,6 +48,7 @@ namespace CPCCharacters
         public static AssetBundle Bundle = null;
         void Awake()
         {
+            Instance = this;
             Bundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("cpccharacters", typeof(ChaosPoppycarsCardsCharacters).Assembly);
 
             var harmony = new Harmony(ModId);
@@ -64,7 +65,6 @@ namespace CPCCharacters
         private void Start()
         {
             plugins = (List<BaseUnityPlugin>)typeof(BepInEx.Bootstrap.Chainloader).GetField("_plugins", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-            Instance = this;
             ChaosPoppycarsCardsCore.RegisterCards(typeof(ChaosPoppycarsCardsCharacters).Assembly, Bundle);
 
             Unbound.RegisterMenu(ModName, delegate () { }, new Action<GameObject>(this.NewGUI), null, false);
