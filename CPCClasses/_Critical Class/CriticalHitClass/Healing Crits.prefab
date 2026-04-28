@@ -89,7 +89,7 @@ MonoBehaviour:
   cardDestription: Your crits now heal you
   cardStats:
   - positive: 1
-    amount: +10
+    amount: +25
     simepleAmount: 0
     stat: Heal on Crit
   rarity: 1
@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundCharacterSlowFreeze: {fileID: 0}
-  AddObjectToPlayer: {fileID: 0}
+  AddObjectToPlayer: {fileID: 1550235165504827944, guid: 3fdf1f6232560974b919d51dd9209482,
+    type: 3}
   objectsAddedToPlayer: []
   sizeMultiplier: 1
   health: 1
@@ -375,7 +376,6 @@ MonoBehaviour:
   GunCritChance2: 0
   GunCritBounces: 0
   GunCritDamageOnBounce: 0
-  GunConsecutiveCrits: 0
   GunConsecutiveCritsDamage: 0
   GunGuranteedCrits: 0
   GunCritSlow: 0
@@ -383,10 +383,8 @@ MonoBehaviour:
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0
-  GunUnblockableCrits: 0
-  GunCritHeal: 10
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritHeal: 25
+  GunCritAmmo: 0
 --- !u!114 &114459467567401784
 MonoBehaviour:
   m_ObjectHideFlags: 0

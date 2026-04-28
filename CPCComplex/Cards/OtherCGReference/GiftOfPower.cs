@@ -42,6 +42,10 @@ namespace CPCComplex.Cards
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             //Run when the card is removed from the player
         }
+        public override void OnReassignCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
+        {
+            PickManager.GiveConditionalPick(player, 4, false, condition: card => !PickManager.IsShuffleCard(card) && (RarityUtils.GetRarityData(card.rarity).relativeRarity >= RarityUtils.GetRarityData(CardInfo.Rarity.Common).relativeRarity));
+        }
 
         protected override string GetTitle()
         {

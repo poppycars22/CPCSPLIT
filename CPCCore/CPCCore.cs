@@ -8,9 +8,12 @@ using CPCCore.Utilities;
 using CPCTabInfoSTATS;
 using HarmonyLib;
 using Jotunn.Utils;
+using LuckLib;
 using MapEmbiggener.Controllers;
 using ModdingUtils;
+using Nullmanager;
 using Photon.Realtime;
+using PickPhaseImprovements;
 using RarityLib.Utils;
 using System;
 using System.Collections;
@@ -53,6 +56,7 @@ namespace CPCCore
     [BepInDependency("pykess.rounds.plugins.mapembiggener", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("Systems.R00t.PickPhaseImprovements", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.aalund13.rounds.toggle_cards_categories", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("Systems.R00t.Luck", BepInDependency.DependencyFlags.HardDependency)]
     // Declares our mod to Bepin
     [BepInPlugin(ModId, ModName, Version)]
 
@@ -62,7 +66,7 @@ namespace CPCCore
     {
         private const string ModId = "com.Poppycars.CPCCore.Id";
         private const string ModName = "ChaosPoppycarsCardsCore";
-        public const string Version = "1.0.7"; // What version are we on (major.minor.patch)?
+        public const string Version = "1.0.8"; // What version are we on (major.minor.patch)?
         public const string ModInitials = "CPCCore";
         public static Harmony harmony;
         internal static List<BaseUnityPlugin> plugins;
@@ -170,28 +174,29 @@ namespace CPCCore
             //ChaosPoppycarsCardsCore.ArtAssets = AssetUtils.LoadAssetBundleFromResources("cpccore", typeof(ChaosPoppycarsCardsCore).Assembly);
             RegisterCards(typeof(ChaosPoppycarsCardsCore).Assembly, Bundle);
             GameModeManager.AddHook(GameModeHooks.HookPointEnd, PointEnd);
+            NullManager.instance.RegesterOnAddCallback(OnNullAdd);
             //GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, (gm) => ExtraPicks());
             //  GameModeManager.AddHook(GameModeHooks.HookBattleStart, LightSaberRangeReset);
             // make cards mutually exclusive
-                /*var original = typeof(CardChoice).GetMethod("SpawnUniqueCard");
+            /*var original = typeof(CardChoice).GetMethod("SpawnUniqueCard");
 
-                // retrieve all patches
-                var patches = Harmony.GetPatchInfo(original);
-                if (patches is null) UnityEngine.Debug.Log("patches null");  // not patched
+            // retrieve all patches
+            var patches = Harmony.GetPatchInfo(original);
+            if (patches is null) UnityEngine.Debug.Log("patches null");  // not patched
 
-                // get a summary of all different Harmony ids involved
-                UnityEngine.Debug.Log("all owners: " + patches.Owners);
+            // get a summary of all different Harmony ids involved
+            UnityEngine.Debug.Log("all owners: " + patches.Owners);
 
-                // get info about all Prefixes/Postfixes/Transpilers
-                foreach (var patch in patches.Prefixes)
-                {
-                    UnityEngine.Debug.Log("index: " + patch.index);
-                    UnityEngine.Debug.Log("owner: " + patch.owner);
-                    UnityEngine.Debug.Log("patch method: " + patch.PatchMethod);
-                    UnityEngine.Debug.Log("priority: " + patch.priority);
-                    UnityEngine.Debug.Log("before: " + patch.before);
-                    UnityEngine.Debug.Log("after: " + patch.after);
-                }*/
+            // get info about all Prefixes/Postfixes/Transpilers
+            foreach (var patch in patches.Prefixes)
+            {
+                UnityEngine.Debug.Log("index: " + patch.index);
+                UnityEngine.Debug.Log("owner: " + patch.owner);
+                UnityEngine.Debug.Log("patch method: " + patch.PatchMethod);
+                UnityEngine.Debug.Log("priority: " + patch.priority);
+                UnityEngine.Debug.Log("before: " + patch.before);
+                UnityEngine.Debug.Log("after: " + patch.after);
+            }*/
             ExtensionMethods.ExecuteAfterFrames(this, 60, delegate ()
             {
                 Enumerable.ToList<Card>(CardManager.cards.Values).ForEach(delegate (Card card)
@@ -206,6 +211,96 @@ namespace CPCCore
             CardCategory cardCategory = CustomCardCategories.instance.CardCategory(text);
             CardCategory[] categories = CollectionExtensions.AddToArray<CardCategory>(card.cardInfo.categories, cardCategory);
             card.cardInfo.categories = categories;
+        }
+
+        private void OnNullAdd(NullCardInfo card, Player player)
+        {
+            Gun gun = player.GetComponent<Holding>().holdable.GetComponent<Gun>();
+            CharacterStatModifiers stats = player.data.stats;
+            var nullData = stats.GetAdditionalData().nullData;
+            int nullcount = player.GetNullCount();
+
+            //if (nullData.damageRedCards > 0)
+            //{
+                //stats.GetAdditionalData().DamageReduction += ((0.5f * Mathf.Log10(nullData.damageRedCards * nullcount + 1)) - (0.5f * Mathf.Log10(nullData.damageRedCards * (nullcount - 1) + 1)));
+            //}
+
+            stats.GetAdditionalData().maxWarps += nullData.screenWarps;
+            player.GetComponent<Luck>().PlayerLuck += nullData.luckInc;
+            gun.knockback *= nullData.knockback;
+            for (int i = 0; i < nullData.nullShuffles; i++)
+            {
+                PickManager.QueueShuffleForPicker(player);
+            }
+            for (int i =0; i<nullData.nullCurses; i++)
+            {
+                CurseManager.instance.CursePlayer(player, (curse) =>
+                {
+                    ModdingUtils.Utils.CardBarUtils.instance.ShowImmediate(player, curse, 3f);
+                });
+            }
+
+            UpdateNullStatsForPlayer(player);
+        }
+
+        public static void UpdateNullStatsForPlayer(Player player)
+        {
+            List<CardInfoStat> stats = new List<CardInfoStat>();
+            var nullData = player.data.stats.GetAdditionalData().nullData;
+            int nullcount = player.GetNullCount();
+
+            if (nullData.screenWarps > 0)
+            {
+                stats.Add(new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Screen Warps",
+                    amount = $"+{nullData.screenWarps}",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                });
+            }
+            if (nullData.luckInc > 0)
+            {
+                stats.Add(new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Luck",
+                    amount = $"+{nullData.luckInc}",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                });
+            }
+            if (nullData.nullShuffles > 0)
+            {
+                stats.Add(new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Shuffles",
+                    amount = $"+{nullData.nullShuffles}",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                });
+            }
+            if (nullData.knockback > 1f)
+            {
+                stats.Add(new CardInfoStat()
+                {
+                    positive = true,
+                    stat = "Knockback",
+                    amount = $"+{(nullData.knockback - 1f) * 100}%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                });
+            }
+            if (nullData.nullCurses > 0)
+            {
+                stats.Add(new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Curses",
+                    amount = $"+{nullData.nullCurses}",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                });
+            }
+
+            NullManager.instance.SetAdditionalNullStats(player, "CPC", stats.ToArray());
         }
         IEnumerator PointEnd(IGameModeHandler gm)
         {

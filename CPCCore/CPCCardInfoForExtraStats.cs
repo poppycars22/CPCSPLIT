@@ -17,7 +17,6 @@ namespace CPCCardInfostuffs
         public float GunCritChance2 = 0f;
         public int GunCritBounces = 0;
         public float GunCritDamageOnBounce = 0f;
-        public bool GunConsecutiveCrits = false;
         public float GunConsecutiveCritsDamage = 0f;
         public bool GunGuranteedCrits = false;
         public float GunCritSlow = 0f;
@@ -25,10 +24,8 @@ namespace CPCCardInfostuffs
         public Color GunDoubleCritColor = Color.cyan;
         public float GunCritBulletSpeed = 0f;
         public float GunCritSimulationSpeed = 0f;
-        public bool GunUnblockableCrits = false;
         public float GunCritHeal = 0f;
-        public float GunCritBlockCDReduction = 0f;
-        public bool GunBlockingCrits = false;
+        public int GunCritAmmo = 0;
         //public bool NeedsNull = false; 
 
 

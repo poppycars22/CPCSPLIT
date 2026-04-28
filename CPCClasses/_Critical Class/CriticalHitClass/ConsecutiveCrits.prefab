@@ -86,15 +86,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundDisableBlockBasic: 0
   cardName: Consecutive crits
-  cardDestription: Your bullets get stronger if you hit multiple crits in a row (if
-    your double criting you must double crit to increase the damage)
+  cardDestription: Your bullets get stronger if you hit multiple crits in a row (resets
+    if your bullet doesnt get to the same level of crit or higher than the previous
+    shots)
   cardStats:
   - positive: 1
-    amount: +10%
-    simepleAmount: 0
-    stat: Crit Chance
-  - positive: 1
-    amount: +10%
+    amount: +25%
     simepleAmount: 0
     stat: Consecutive Crit Damage
   rarity: 2
@@ -120,7 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundCharacterSlowFreeze: {fileID: 0}
-  AddObjectToPlayer: {fileID: 0}
+  AddObjectToPlayer: {fileID: 1550235165504827944, guid: 60d1246e9fee9a6489e8d42ccaa98f7a,
+    type: 3}
   objectsAddedToPlayer: []
   sizeMultiplier: 1
   health: 1
@@ -377,21 +375,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunCritDamage2: 0
-  GunCritChance2: 0.1
+  GunCritChance2: 0
   GunCritBounces: 0
   GunCritDamageOnBounce: 0
-  GunConsecutiveCrits: 0
-  GunConsecutiveCritsDamage: 10
+  GunConsecutiveCritsDamage: 25
   GunGuranteedCrits: 0
   GunCritSlow: 0
   GunCritColor: {r: 1, g: 0, b: 0, a: 1}
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0
-  GunUnblockableCrits: 0
   GunCritHeal: 0
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritAmmo: 0
 --- !u!114 &114479816391054504
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -57,7 +57,7 @@ namespace CPCCore.Patches
                 hitInfo.collider = MapManager.instance.currentMap.Map.GetComponentsInChildren<Collider2D>()[colliderID];
                 hitInfo.transform = hitInfo.collider.transform;
             }
-            if (hitInfo.collider.GetComponent<HealthHandler>() == null && ___ownPlayer != null && hitInfo.transform != null && ___ownPlayer.GetComponent<CooldownBlock>() != null && ___ownPlayer.GetComponent<CooldownBlock>().duration <= 0)
+            if (hitInfo.collider != null && hitInfo.collider.GetComponent<HealthHandler>() == null && ___ownPlayer != null && hitInfo.transform != null && ___ownPlayer.GetComponent<CooldownBlock>() != null && ___ownPlayer.GetComponent<CooldownBlock>().duration <= 0)
             {
                 if (___ownPlayer.data.stats.GetAdditionalData().blockMover && !___ownPlayer.data.stats.GetAdditionalData().blockPush)
                 {

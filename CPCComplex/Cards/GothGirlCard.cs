@@ -74,6 +74,13 @@ namespace CPCComplex.Cards
                     stat = "Everyones Hand Size",
                     amount = "-3",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+               },
+               new CardInfoStat()
+               {
+                    positive = true,
+                    stat = "Everyones Luck",
+                    amount = "-25",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                }
             };
         }

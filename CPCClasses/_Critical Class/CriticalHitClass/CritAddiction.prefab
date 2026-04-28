@@ -94,11 +94,11 @@ MonoBehaviour:
     simepleAmount: 0
     stat: Crit Chance
   - positive: 0
-    amount: +15%
+    amount: +10%
     simepleAmount: 0
     stat: Reload Time
   - positive: 0
-    amount: -15%
+    amount: -10%
     simepleAmount: 0
     stat: Damage
   rarity: 2
@@ -184,8 +184,8 @@ MonoBehaviour:
   shootPosition: {fileID: 0}
   player: {fileID: 0}
   isReloading: 0
-  damage: 0.85
-  reloadTime: 1.15
+  damage: 0.9
+  reloadTime: 1.1
   reloadTimeAdd: 0
   recoilMuiltiplier: 1
   knockback: 1
@@ -384,7 +384,6 @@ MonoBehaviour:
   GunCritChance2: 0.25
   GunCritBounces: 0
   GunCritDamageOnBounce: 0
-  GunConsecutiveCrits: 0
   GunConsecutiveCritsDamage: 0
   GunGuranteedCrits: 0
   GunCritSlow: 0
@@ -392,10 +391,8 @@ MonoBehaviour:
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0
-  GunUnblockableCrits: 0
   GunCritHeal: 0
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritAmmo: 0
 --- !u!114 &114742578806561476
 MonoBehaviour:
   m_ObjectHideFlags: 0

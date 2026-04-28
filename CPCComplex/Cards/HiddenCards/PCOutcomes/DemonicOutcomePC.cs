@@ -68,7 +68,7 @@ namespace CPCComplex.Cards
                 },
                 new CardInfoStat()
                 {
-                    positive = true,
+                    positive = false,
                     stat = "Reload Speed",
                     amount = "+25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned

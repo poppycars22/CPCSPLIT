@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceType: 0
-  categoryPath: Complex
+  categoryPath: Complex/Mistakes
   CategoryPath: 
   categoryAsset: {fileID: 0}
   Priority: 0

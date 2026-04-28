@@ -1,4 +1,12 @@
-﻿using System;
+﻿using BepInEx;
+using CardChoiceSpawnUniqueCardPatch.CustomCategories;
+using CPCComplex.MonoBehaviours;
+using CPCCore.Extensions;
+using CPCCore.Utilities;
+using HarmonyLib;
+using LuckLib;
+using RarityLib.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +14,6 @@ using System.Threading.Tasks;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
-using BepInEx;
-using CPCCore.Utilities;
-using HarmonyLib;
-using CardChoiceSpawnUniqueCardPatch.CustomCategories;
-using RarityLib.Utils;
-using CPCComplex.MonoBehaviours;
-using CPCCore.Extensions;
 
 namespace CPCComplex.Cards
 {
@@ -20,6 +21,7 @@ namespace CPCComplex.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
+            cardInfo.gameObject.GetOrAddComponent<Luck>().LuckAdd = -25;
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
@@ -65,6 +67,13 @@ namespace CPCComplex.Cards
                     positive = false,
                     stat = "Hand Size",
                     amount = "-3",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+               },
+               new CardInfoStat()
+               {
+                    positive = false,
+                    stat = "Luck",
+                    amount = "-25",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                }
             };

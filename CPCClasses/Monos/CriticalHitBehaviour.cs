@@ -13,7 +13,7 @@ using UnboundLib.Networking;
 using UnboundLib;
 using static UnboundLib.NetworkingManager;
 using ModdingUtils.MonoBehaviours;
-
+/*
 namespace CPCClasses.MonoBehaviours
 {
     [DisallowMultipleComponent]
@@ -41,7 +41,6 @@ namespace CPCClasses.MonoBehaviours
             this.healthHandler = this.player.data.healthHandler;
             isCriticalHit = false;
             isDoubleCrit = false;
-            // Checks to see if we have a saved gun already, if not, we make one.
 
         }
 
@@ -82,13 +81,13 @@ namespace CPCClasses.MonoBehaviours
                 }
 
 
-                NetworkingManager.RPC(typeof(CriticalHitBehaviour), nameof(SyncCriticalHit), new object[] { isCriticalHit });
+                NetworkingManager.RPC(typeof(CriticalHitBehaviour), nameof(SyncCriticalHit), isCriticalHit);
 
                 if (gun.GetAdditionalData().guranteedCrits == false && gun.GetAdditionalData().criticalHitChance1 > 1f)
                 {
                     float doubleCritChance = (gun.GetAdditionalData().criticalHitChance1 - 1f) % 1f;
                     isDoubleCrit = UnityEngine.Random.value < doubleCritChance;
-                    NetworkingManager.RPC(typeof(CriticalHitBehaviour), nameof(SyncDoubleCrit), new object[] { isDoubleCrit });
+                    NetworkingManager.RPC(typeof(CriticalHitBehaviour), nameof(SyncDoubleCrit), isDoubleCrit);
                 }
                // UnityEngine.Debug.Log("Master Client");
                // UnityEngine.Debug.Log(isCriticalHit);
@@ -106,7 +105,7 @@ namespace CPCClasses.MonoBehaviours
             if (isCriticalHit)
             {
                 spawnedAttack.SetColor(gun.GetAdditionalData().CritColor);
-                if (gun.GetAdditionalData().criticalHitChance1 >= 1.1f & gun.GetAdditionalData().guranteedCrits == false)
+                if (gun.GetAdditionalData().criticalHitChance1 > 1f & gun.GetAdditionalData().guranteedCrits == false)
                 {
                     int additionalCrits = (int)Math.Round(gun.GetAdditionalData().criticalHitChance1);
                     //UnityEngine.Debug.Log(additionalCrits + "addition crits");
@@ -122,7 +121,7 @@ namespace CPCClasses.MonoBehaviours
                     else
                     {
                         critMultiplier += additionalCrits;
-                        if (gun.GetAdditionalData().consecutiveCrits == true)
+                        /*if (gun.GetAdditionalData().consecutiveCrits == true)
                         {
                             consecutiveCritDamage = 0f;
                         }
@@ -139,9 +138,9 @@ namespace CPCClasses.MonoBehaviours
                     trail.mask = trail.ignoreWallsMask;
                 }
                
-                bullet.unblockable = gun.GetAdditionalData().unblockableCrits;
+                //bullet.unblockable = gun.GetAdditionalData().unblockableCrits;
 
-                if (critMultiplier > 1.1f)
+                if (critMultiplier > 1f)
                 {
                     if (gun.GetAdditionalData().criticalBulletSpeed > 1f)
                     {
@@ -162,7 +161,7 @@ namespace CPCClasses.MonoBehaviours
                     {
                         RayHitReflect rayHitReflect = obj.gameObject.AddComponent<RayHitReflect>();
 
-                        if (critMultiplier > 1.1f)
+                        if (critMultiplier > 1f)
                         {
                             rayHitReflect.reflects += (gun.GetAdditionalData().criticalHitBounces * (int)Math.Round(critMultiplier)) - 1;
                             rayHitReflect.dmgM += gun.GetAdditionalData().criticalHitDamageOnBounce;
@@ -180,7 +179,7 @@ namespace CPCClasses.MonoBehaviours
                     {
                         RayHitReflect rayHitReflect2 = obj.gameObject.GetComponent<RayHitReflect>();
 
-                        if (critMultiplier > 1.1f)
+                        if (critMultiplier > 1f)
                         {
                             rayHitReflect2.reflects += (gun.GetAdditionalData().criticalHitBounces * (int)Math.Round(critMultiplier));
                             rayHitReflect2.dmgM += gun.GetAdditionalData().criticalHitDamageOnBounce;
@@ -214,18 +213,13 @@ namespace CPCClasses.MonoBehaviours
                     }
                 if (isCriticalHit)
                 {
-
-
-                   
-
-
-                    if (critMultiplier > 1.1f)
+                    if (critMultiplier > 1f)
                     {
                         if (gun.GetAdditionalData().criticalHitDamage1 > 0f)
                         {
-                            bullet.damage *= (gun.GetAdditionalData().criticalHitDamage1 * critMultiplier)/* / ((critMultiplier / 2f) + 0.75f)*/;
+                            bullet.damage *= (gun.GetAdditionalData().criticalHitDamage1 * critMultiplier)/* / ((critMultiplier / 2f) + 0.75f);
                         }
-                        if (gun.GetAdditionalData().consecutiveCrits == true)
+                        /*if (gun.GetAdditionalData().consecutiveCrits == true)
                         {
                             bullet.damage += consecutiveCritDamage;
                         }
@@ -236,13 +230,13 @@ namespace CPCClasses.MonoBehaviours
                         {
                             bullet.damage *= (gun.GetAdditionalData().criticalHitDamage1);
                         }
-                        if (gun.GetAdditionalData().consecutiveCrits == true)
+                        /*if (gun.GetAdditionalData().consecutiveCrits == true)
                         {
                             bullet.damage += consecutiveCritDamage;
                         }
                     }
 
-                    if (gun.GetAdditionalData().consecutiveCrits == true)
+                    /*if (gun.GetAdditionalData().consecutiveCrits == true)
                     {
                         consecutiveCritDamage += gun.GetAdditionalData().consecutiveCritsDamage;
                     }
@@ -284,15 +278,15 @@ namespace CPCClasses.MonoBehaviours
                     }
                     if (PhotonNetwork.IsMasterClient)
                     {
-                        if (gun.GetAdditionalData().guranteedCrits == false && gun.GetAdditionalData().BlockingCrits == true && gun.GetAdditionalData().criticalHitChance1 <= 1f && shoots <= 0)
+                        /*if (gun.GetAdditionalData().guranteedCrits == false && gun.GetAdditionalData().BlockingCrits == true && gun.GetAdditionalData().criticalHitChance1 <= 1f && shoots <= 0)
                         {
                             player.data.block.CallDoBlock(false, true, BlockTrigger.BlockTriggerType.Default, default, true);
-                            shoots = 5 + (gun.numberOfProjectiles - 1) + (gun.bursts - 1);
+                            shoots = 5 + (gun.numberOfProjectiles - 1) + (gun.bursts);
                         }
                         else if (gun.GetAdditionalData().guranteedCrits == false && gun.GetAdditionalData().BlockingCrits == true && isDoubleCrit == true && shoots <= 0)
                         {
                             player.data.block.CallDoBlock(false, true, BlockTrigger.BlockTriggerType.Default, default, true);
-                            shoots = 5 + (gun.numberOfProjectiles - 1) + (gun.bursts - 1);
+                            shoots = 5 + (gun.numberOfProjectiles - 1) + (gun.bursts);
                         }
                     }
 
@@ -302,7 +296,7 @@ namespace CPCClasses.MonoBehaviours
                 else
                 {
 
-                    if (gun.GetAdditionalData().consecutiveCrits == true)
+                    /*if (gun.GetAdditionalData().consecutiveCrits == true)
                     {
                         consecutiveCritDamage = 0f;
                     }
@@ -340,7 +334,7 @@ namespace CPCClasses.MonoBehaviours
             {
                 isDoubleCrit = (bool)propertiesThatChanged[IsDoubleCritKey];
             }
-        }*/
+        }
         public void OnDestroy()
         {
             // Remove our action when the mono is removed
@@ -353,7 +347,7 @@ namespace CPCClasses.MonoBehaviours
 
     }
 }
-
+*/
 
 
 

@@ -90,7 +90,7 @@ MonoBehaviour:
     damage
   cardStats:
   - positive: 1
-    amount: +50%
+    amount: +75%
     simepleAmount: 0
     stat: Crit Damage
   - positive: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1bc552f9508fd4c80068e4b466012c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunCritDamage2: 0.5
+  GunCritDamage2: 0.75
   GunCritChance2: 0
   GunCritBounces: 0
   GunCritDamageOnBounce: 0

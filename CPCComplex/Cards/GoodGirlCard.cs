@@ -4,6 +4,8 @@ using CPCComplex.MonoBehaviours;
 using CPCCore.Extensions;
 using CPCCore.Utilities;
 using HarmonyLib;
+using LuckLib;
+using Photon.Realtime;
 using RarityLib.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,12 +17,15 @@ using UnboundLib.Cards;
 using UnityEngine;
 using WillsWackyManagers.Utils;
 
+
+
 namespace CPCComplex.Cards
 {
     class GoodGirlCard : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
+            cardInfo.gameObject.GetOrAddComponent<Luck>().LuckAdd = 100;
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
@@ -71,8 +76,8 @@ namespace CPCComplex.Cards
                new CardInfoStat()
                {
                     positive = true,
-                    stat = "Rare Card Chance",
-                    amount = "+10%",
+                    stat = "Luck",
+                    amount = "+100",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                }
             };

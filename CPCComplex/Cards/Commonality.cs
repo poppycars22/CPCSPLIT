@@ -4,6 +4,7 @@ using CPCComplex.MonoBehaviours;
 using CPCCore.Extensions;
 using CPCCore.Utilities;
 using HarmonyLib;
+using PickPhaseImprovements;
 using RarityLib.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace CPCComplex.Cards
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
-            statModifiers.health = 1.25f;
+            ModdingUtils.Extensions.CardInfoExtension.GetAdditionalData(cardInfo).canBeReassigned = false;
+            PickManager.RegisterShuffleCard(cardInfo);
             CPCDebug.Log($"[{ChaosPoppycarsCardsComplex.ModInitials}][Card] {GetTitle()} has been setup.");
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
         }
@@ -66,8 +68,8 @@ namespace CPCComplex.Cards
                new CardInfoStat()
                {
                     positive = true,
-                    stat = "Health",
-                    amount = "+25%",
+                    stat = "Shuffle",
+                    amount = "+1",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                }
             };

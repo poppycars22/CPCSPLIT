@@ -13,10 +13,12 @@ namespace CPCCommissions.Extensions
     {
         public bool rngDmg;
         public bool splitDmg;
+        public bool pong;
         public CharacterStatModifiersAdditionalDataCPCCom()
         {
             rngDmg = false;
             splitDmg = false;
+            pong = false;
         }
     }
     public static class CharacterStatModifiersExtension
@@ -45,6 +47,7 @@ namespace CPCCommissions.Extensions
         {
             __instance.GetAdditionalDataCPCCom().rngDmg = false;
             __instance.GetAdditionalDataCPCCom().splitDmg = false;
+            __instance.GetAdditionalDataCPCCom().pong = false;
         }
     }
 }

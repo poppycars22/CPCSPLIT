@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cards:
-  - {fileID: 1043437007509817, guid: 90bd38c88ac32d34f95afb8594944560, type: 3}
-  - {fileID: 1043437007509817, guid: 231d73a3a74e89f4190d51250ccb3103, type: 3}
+  - {fileID: 1043437007509817, guid: cf2dfa5dca60a5d4a9e8a433fd793d76, type: 3}
+  - {fileID: 1043437007509817, guid: a7f883e1890e354469f2d00d5aaffd89, type: 3}
   - {fileID: 1043437007509817, guid: 867783f8b3f07a44d90be5eab23db170, type: 3}
   - {fileID: 1043437007509817, guid: 20fc025d11529a643acf43ce78196118, type: 3}
   - {fileID: 1043437007509817, guid: ead8e42a0d3ae88439f0dac45cac3192, type: 3}
@@ -60,7 +60,5 @@ MonoBehaviour:
   - {fileID: 1043437007509817, guid: ef31aa3d58f8fb3488358edf37afe6dc, type: 3}
   - {fileID: 1043437007509817, guid: 49baafdff41ec5b4193c13b2807786f2, type: 3}
   - {fileID: 1043437007509817, guid: 22b53645f12a4ab48856c16ddafc4d49, type: 3}
-  - {fileID: 1043437007509817, guid: cf2dfa5dca60a5d4a9e8a433fd793d76, type: 3}
-  - {fileID: 1043437007509817, guid: a7f883e1890e354469f2d00d5aaffd89, type: 3}
-  - {fileID: 1043437007509817, guid: cff0372f7cdffbc45b113a00abe9d826, type: 3}
+  - {fileID: 1043437007509817, guid: 24fd5a6773c2ba24e8cbcb4edf3242e6, type: 3}
   HiddenCards: []

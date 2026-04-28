@@ -31,10 +31,11 @@
         "PSA.dll",
         "PlayerActionsHelper.dll",
         "PlayerTimeScale.dll",
-        "RoundsWithFriends.dll",
+        "LuckLib.dll",
         "PickNCards.dll",
         "PickPhaseImprovements.dll",
-        "MapEmbiggener.dll"
+        "MapEmbiggener.dll",
+        "RoundsWithFriends.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": []

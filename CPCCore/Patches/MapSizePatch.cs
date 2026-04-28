@@ -23,7 +23,7 @@ namespace CPCCore.Patches
             {
                 increase += player.data.stats.GetAdditionalData().mapSizeI;
             }
-            increase = Mathf.Clamp(MapEmbiggener.MapEmbiggener.setSize + increase, 0.01f, 7);
+            increase = Mathf.Clamp(MapEmbiggener.MapEmbiggener.setSize + increase, 0.25f, 7);
             __instance.MapSize = increase;
         }
     }

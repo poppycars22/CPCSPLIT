@@ -30,7 +30,8 @@
         "InControl.dll",
         "PSA.dll",
         "PlayerActionsHelper.dll",
-        "PlayerTimeScale.dll"
+        "PlayerTimeScale.dll",
+        "LuckLib.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": []

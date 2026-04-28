@@ -46,7 +46,7 @@ namespace CPCComplex
         {
             private const string ModId = "com.Poppycars.CPCComplex.Id";
             private const string ModName = "ChaosPoppycarsCardsComplex";
-            public const string Version = "1.0.4"; // What version are we on (major.minor.patch)?
+            public const string Version = "1.0.5"; // What version are we on (major.minor.patch)?
             public const string ModInitials = "CPCComplex";
             internal static List<BaseUnityPlugin> plugins;
             public static ChaosPoppycarsCardsComplex Instance { get; private set; }
@@ -94,7 +94,7 @@ namespace CPCComplex
 
                 ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => !cardinfo.rarity.Equals(RarityLib.Utils.RarityUtils.GetRarity("Geese")) || PlayerManager.instance.players.Any(p => player.teamID != p.teamID && p.data.currentCards.Contains(GeeseSwarm.Card)));
                 ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => ExpansionCheck(player, cardinfo));
-
+                ModdingUtils.Utils.Cards.instance.AddCardValidationFunction((player, cardinfo) => SmallExpansionCheck(player, cardinfo));
             }
             
             public bool ExpansionCheck(Player player, CardInfo card)
@@ -103,12 +103,22 @@ namespace CPCComplex
                     return true;
                 float map = 0;
                 foreach (Player play in PlayerManager.instance.players)
-                    map += player.data.stats.GetAdditionalData().mapSizeI;
+                    map += play.data.stats.GetAdditionalData().mapSizeI;
                 map += MapEmbiggener.MapEmbiggener.setSize;
                 return map + 0.5f <= 7;
             }
+            public bool SmallExpansionCheck(Player player, CardInfo card)
+            {
+                if (!card.name.Equals("__CPC__Shrinkage"))
+                    return true;
+                float map = 0;
+                foreach (Player play in PlayerManager.instance.players)
+                    map += play.data.stats.GetAdditionalData().mapSizeI;
+                map += MapEmbiggener.MapEmbiggener.setSize;
+                return map - 0.25f >= 0.25;
+            }
 
-            IEnumerator GameStart(IGameModeHandler gm)
+        IEnumerator GameStart(IGameModeHandler gm)
             {
             // Runs at start of match
                 RarityUtils.SetCardRarityModifier(KnifeGoose.Card, 0.5f);

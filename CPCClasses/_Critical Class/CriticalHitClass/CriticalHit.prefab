@@ -87,14 +87,14 @@ MonoBehaviour:
   soundDisableBlockBasic: 0
   cardName: Critical Hit
   cardDestription: Time for a crit build (if your crit chance goes over 100% you can
-    get "double crits")
+    get "double crits"), Luck helps with hitting crits
   cardStats:
   - positive: 1
     amount: +25%
     simepleAmount: 0
     stat: Crit Chance
   - positive: 1
-    amount: +50%
+    amount: +100%
     simepleAmount: 0
     stat: Crit Damage
   - positive: 0
@@ -235,7 +235,23 @@ MonoBehaviour:
   currentCharge: 0
   useCharge: 0
   dontAllowAutoFire: 0
-  objectsToSpawn: []
+  objectsToSpawn:
+  - effect: {fileID: 0}
+    direction: 0
+    spawnOn: 0
+    spawnAsChild: 0
+    numberOfSpawns: 0
+    normalOffset: 0
+    stickToBigTargets: 0
+    stickToAllTargets: 0
+    zeroZ: 0
+    AddToProjectile: {fileID: 1550235165504827944, guid: 215b37382137cbe44b83571466c6ee53,
+      type: 3}
+    removeScriptsFromProjectileObject: 0
+    scaleStacks: 0
+    scaleStackM: 0
+    scaleFromDamage: 0
+    stacks: 0
   projectileColor: {r: 0, g: 0, b: 0, a: 1}
   waveMovement: 0
   teleport: 0
@@ -381,11 +397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1bc552f9508fd4c80068e4b466012c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunCritDamage2: 0.5
+  GunCritDamage2: 1
   GunCritChance2: 0.25
   GunCritBounces: 0
   GunCritDamageOnBounce: 0
-  GunConsecutiveCrits: 0
   GunConsecutiveCritsDamage: 0
   GunGuranteedCrits: 0
   GunCritSlow: 0
@@ -393,10 +408,8 @@ MonoBehaviour:
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0
-  GunUnblockableCrits: 0
   GunCritHeal: 0
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritAmmo: 0
 --- !u!114 &114034150758030282
 MonoBehaviour:
   m_ObjectHideFlags: 0

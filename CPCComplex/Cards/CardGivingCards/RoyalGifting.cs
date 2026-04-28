@@ -29,16 +29,13 @@ namespace CPCComplex.Cards
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            ChaosPoppycarsCardsComplex.Instance.ExecuteAfterFrames(10, () => {
+            ChaosPoppycarsCardsComplex.Instance.ExecuteAfterFrames(3, () => {
                 var rare = ModdingUtils.Utils.Cards.instance.GetRandomCardWithCondition(player, gun, gunAmmo, data, health, gravity, block, characterStats, RareCondition);
                 ModdingUtils.Utils.Cards.instance.AddCardToPlayer(player, rare, false, "", 2f, 2f, true);
                 ModdingUtils.Utils.CardBarUtils.instance.ShowImmediate(player, rare, 3f);
                 CurseManager.instance.CursePlayer(player, (curse) => {
                     ModdingUtils.Utils.CardBarUtils.instance.ShowImmediate(player, curse, 3f);
                 });
-            });
-            ChaosPoppycarsCardsComplex.Instance.ExecuteAfterFrames(11, () =>
-            {
                 var uncommon = ModdingUtils.Utils.Cards.instance.GetRandomCardWithCondition(player, gun, gunAmmo, data, health, gravity, block, characterStats, UncommonCondition);
                 ModdingUtils.Utils.Cards.instance.AddCardToPlayer(player, uncommon, false, "", 2f, 2f, true);
                 ModdingUtils.Utils.CardBarUtils.instance.ShowImmediate(player, uncommon, 3f);
@@ -46,9 +43,6 @@ namespace CPCComplex.Cards
                 {
                     ModdingUtils.Utils.CardBarUtils.instance.ShowImmediate(player, curse, 3f);
                 });
-            });
-            ChaosPoppycarsCardsComplex.Instance.ExecuteAfterFrames(12, () =>
-            {
                 var common = ModdingUtils.Utils.Cards.instance.GetRandomCardWithCondition(player, gun, gunAmmo, data, health, gravity, block, characterStats, CommonCondition);
                 var common2 = ModdingUtils.Utils.Cards.instance.GetRandomCardWithCondition(player, gun, gunAmmo, data, health, gravity, block, characterStats, CommonCondition);
                 ModdingUtils.Utils.Cards.instance.AddCardToPlayer(player, common, false, "", 2f, 2f, true);

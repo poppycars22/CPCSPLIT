@@ -380,7 +380,6 @@ MonoBehaviour:
   GunCritChance2: 0
   GunCritBounces: 2
   GunCritDamageOnBounce: 0.5
-  GunConsecutiveCrits: 0
   GunConsecutiveCritsDamage: 0
   GunGuranteedCrits: 0
   GunCritSlow: 0
@@ -388,10 +387,8 @@ MonoBehaviour:
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0
-  GunUnblockableCrits: 0
   GunCritHeal: 0
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritAmmo: 0
 --- !u!114 &114988027048681694
 MonoBehaviour:
   m_ObjectHideFlags: 0

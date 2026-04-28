@@ -59,7 +59,7 @@ namespace CPCClasses.MonoBehaviours
 
         private void Update()
         {
-            if (this.data.input.direction == Vector3.zero || this.data.input.direction == Vector3.down || this.data.input.direction == Vector3.up && PlayerStatus.PlayerAliveAndSimulated(player))
+            if ((this.data.input.direction == Vector3.zero || this.data.input.direction == Vector3.down || this.data.input.direction == Vector3.up) && PlayerStatus.PlayerAliveAndSimulated(player))
             {
                 timePass += TimeHandler.deltaTime;
                 if (timePass > 0.5f)  //every half second

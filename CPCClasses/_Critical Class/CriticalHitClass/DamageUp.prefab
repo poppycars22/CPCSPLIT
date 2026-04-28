@@ -89,7 +89,7 @@ MonoBehaviour:
   cardDestription: Increases your damage when you get a critical hit
   cardStats:
   - positive: 1
-    amount: +25%
+    amount: +50%
     simepleAmount: 0
     stat: Crit Damage
   rarity: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1bc552f9508fd4c80068e4b466012c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunCritDamage2: 0.25
+  GunCritDamage2: 0.5
   GunCritChance2: 0
   GunCritBounces: 0
   GunCritDamageOnBounce: 0

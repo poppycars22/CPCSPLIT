@@ -71,6 +71,7 @@ namespace CPCCore.Extensions
         //public bool storeDamage;
         //public Vector2 storedDamage;
         //public bool takeStoredDamage;
+        public CPCNullData nullData;
         public CharacterStatModifiersAdditionalData()
         {
          //   RainbowLeafHealth = 0f;
@@ -131,6 +132,7 @@ namespace CPCCore.Extensions
             //storeDamage = true;
             //storedDamage = Vector2.zero;
             //takeStoredDamage = false;
+            nullData = new CPCNullData();
         }
     }
     public static class CharacterStatModifiersExtension
@@ -215,6 +217,16 @@ namespace CPCCore.Extensions
             //__instance.GetAdditionalData().storeDamage = true;
             //__instance.GetAdditionalData().storedDamage = Vector2.zero;
             //__instance.GetAdditionalData().takeStoredDamage = false;
+            __instance.GetAdditionalData().nullData = new CPCNullData();
         }
+    }
+
+    public class CPCNullData
+    {
+        public int luckInc = 0;
+        public int screenWarps = 0;
+        public int nullShuffles = 0;
+        public float knockback = 1f;
+        public int nullCurses = 0;
     }
 }

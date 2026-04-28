@@ -1,4 +1,11 @@
-﻿using System;
+﻿using BepInEx;
+using CardChoiceSpawnUniqueCardPatch.CustomCategories;
+using ClassesManagerReborn.Util;
+using CPCClasses.MonoBehaviours;
+using CPCCore.Utilities;
+using HarmonyLib;
+using RarityLib.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +13,6 @@ using System.Threading.Tasks;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
-using BepInEx;
-
-using CPCClasses.MonoBehaviours;
-using CPCCore.Utilities;
-using HarmonyLib;
-using CardChoiceSpawnUniqueCardPatch.CustomCategories;
-using ClassesManagerReborn.Util;
 
 
 namespace CPCClasses.Cards
@@ -61,7 +61,7 @@ namespace CPCClasses.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Rare;
+            return RarityUtils.GetRarity("Legendary");
         }
         protected override CardInfoStat[] GetStats()
         {

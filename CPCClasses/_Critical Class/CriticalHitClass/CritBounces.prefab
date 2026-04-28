@@ -89,7 +89,7 @@ MonoBehaviour:
   cardDestription: When your bullets crit they bounce
   cardStats:
   - positive: 1
-    amount: +3
+    amount: +5
     simepleAmount: 0
     stat: Crit Bounces
   rarity: 1
@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundCharacterSlowFreeze: {fileID: 0}
-  AddObjectToPlayer: {fileID: 0}
+  AddObjectToPlayer: {fileID: 1550235165504827944, guid: 1aa667faf44d7a54ea44b47f368f7322,
+    type: 3}
   objectsAddedToPlayer: []
   sizeMultiplier: 1
   health: 1
@@ -389,9 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunCritDamage2: 0
   GunCritChance2: 0
-  GunCritBounces: 3
+  GunCritBounces: 5
   GunCritDamageOnBounce: 0
-  GunConsecutiveCrits: 0
   GunConsecutiveCritsDamage: 0
   GunGuranteedCrits: 0
   GunCritSlow: 0
@@ -399,10 +399,8 @@ MonoBehaviour:
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0
-  GunUnblockableCrits: 0
   GunCritHeal: 0
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritAmmo: 0
 --- !u!114 &114620836185068234
 MonoBehaviour:
   m_ObjectHideFlags: 0

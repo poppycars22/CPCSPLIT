@@ -92,6 +92,10 @@ MonoBehaviour:
     amount: +50%
     simepleAmount: 0
     stat: Crit Simulation Speed
+  - positive: 1
+    amount: +10%
+    simepleAmount: 0
+    stat: Crit Chance
   rarity: 1
   cardArt: {fileID: 8310771491631159325, guid: 47df9fafd64cfa443a48c7148976696d, type: 3}
   sprite: {fileID: 21300000, guid: 5b742d082ddefaa489468fac5e1e3bff, type: 2}
@@ -115,7 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundCharacterSlowFreeze: {fileID: 0}
-  AddObjectToPlayer: {fileID: 0}
+  AddObjectToPlayer: {fileID: 1550235165504827944, guid: b772f4cc6109f5e46b99c4ee982b7fba,
+    type: 3}
   objectsAddedToPlayer: []
   sizeMultiplier: 1
   health: 1
@@ -372,10 +377,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunCritDamage2: 0
-  GunCritChance2: 0
+  GunCritChance2: 0.1
   GunCritBounces: 0
   GunCritDamageOnBounce: 0
-  GunConsecutiveCrits: 0
   GunConsecutiveCritsDamage: 0
   GunGuranteedCrits: 0
   GunCritSlow: 0
@@ -383,10 +387,8 @@ MonoBehaviour:
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0.5
-  GunUnblockableCrits: 0
   GunCritHeal: 0
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritAmmo: 0
 --- !u!114 &114452167792874450
 MonoBehaviour:
   m_ObjectHideFlags: 0

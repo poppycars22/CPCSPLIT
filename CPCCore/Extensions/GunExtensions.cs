@@ -16,7 +16,6 @@ namespace CPCCore.Extensions
         public float criticalHitDamage1 = 1f;
         public int criticalHitBounces = 0;
         public float criticalHitDamageOnBounce = 0f;
-        public bool consecutiveCrits = false;
         public bool guranteedCrits = false;
         public float consecutiveCritsDamage = 0f;
         public float CritSlow = 0f;
@@ -24,10 +23,8 @@ namespace CPCCore.Extensions
         public Color DoubleCritColor = Color.cyan;
         public float criticalBulletSpeed = 1f;
         public float criticalSimulationSpeed = 1f;
-        public bool unblockableCrits = false;
         public float criticalHeal = 0f;
-        public float criticalBlockCDReduction = 0f;
-        public bool BlockingCrits = false;
+        public int critAmmo = 0;
 
 
         public GunAdditionalData()
@@ -40,8 +37,6 @@ namespace CPCCore.Extensions
             criticalHitBounces = 0;
 
             criticalHitDamageOnBounce = 0f;
-
-            consecutiveCrits = false;
 
             guranteedCrits = false;
 
@@ -57,13 +52,9 @@ namespace CPCCore.Extensions
 
             criticalSimulationSpeed = 1f;
 
-            unblockableCrits = false;
-
             criticalHeal = 0f;
 
-            criticalBlockCDReduction = 0f;
-
-            BlockingCrits = false;
+            critAmmo = 0;
 
         }
     }
@@ -105,8 +96,6 @@ namespace CPCCore.Extensions
 
             __instance.GetAdditionalData().criticalHitDamageOnBounce = 0f;
 
-            __instance.GetAdditionalData().consecutiveCrits = false;
-
             __instance.GetAdditionalData().consecutiveCritsDamage = 0f;
 
             __instance.GetAdditionalData().guranteedCrits = false;
@@ -121,13 +110,9 @@ namespace CPCCore.Extensions
 
             __instance.GetAdditionalData().criticalSimulationSpeed = 1f;
 
-            __instance.GetAdditionalData().unblockableCrits = false;
-
             __instance.GetAdditionalData().criticalHeal = 0f;
 
-            __instance.GetAdditionalData().criticalBlockCDReduction = 0f;
-
-            __instance.GetAdditionalData().BlockingCrits = false;
+            __instance.GetAdditionalData().critAmmo = 0;
         }
     }
     [HarmonyPatch(typeof(ApplyCardStats), "ApplyStats")]
@@ -155,11 +140,6 @@ namespace CPCCore.Extensions
 
                     ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().criticalHitDamageOnBounce += THINGaa.GunCritDamageOnBounce;
 
-                    if (___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().consecutiveCrits == false)
-                    {
-                        ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().consecutiveCrits = THINGaa.GunConsecutiveCrits;
-                    }
-
                     ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().consecutiveCritsDamage += THINGaa.GunConsecutiveCritsDamage;
 
                     if (___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().guranteedCrits == false)
@@ -183,19 +163,10 @@ namespace CPCCore.Extensions
 
                     ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().criticalSimulationSpeed += THINGaa.GunCritSimulationSpeed;
 
-                    if (___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().unblockableCrits == false)
-                    {
-                        ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().unblockableCrits = THINGaa.GunUnblockableCrits;
-                    }
-
                     ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().criticalHeal += THINGaa.GunCritHeal;
 
-                    ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().criticalBlockCDReduction += THINGaa.GunCritBlockCDReduction;
+                    ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().critAmmo += THINGaa.GunCritAmmo;
 
-                    if (___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().BlockingCrits == false)
-                    {
-                        ___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().BlockingCrits = THINGaa.GunBlockingCrits;
-                    }
                     //UnityEngine.Debug.Log($"[crit chance {___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().criticalHitChance1}, crit damage {___playerToUpgrade.data.weaponHandler.gun.GetAdditionalData().criticalHitDamage1} ]");
                 }
             }

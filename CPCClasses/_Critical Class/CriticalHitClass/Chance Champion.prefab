@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114330103014690826}
   - component: {fileID: 114803116625904636}
   - component: {fileID: 114800675275404118}
+  - component: {fileID: 114119786459103708}
   m_Layer: 0
   m_Name: Chance Champion
   m_TagString: Untagged
@@ -92,6 +93,10 @@ MonoBehaviour:
     amount: +50%
     simepleAmount: 0
     stat: Crit Chance
+  - positive: 1
+    amount: +50
+    simepleAmount: 0
+    stat: Luck
   - positive: 0
     amount: -25%
     simepleAmount: 0
@@ -379,7 +384,6 @@ MonoBehaviour:
   GunCritChance2: 0.5
   GunCritBounces: 0
   GunCritDamageOnBounce: 0
-  GunConsecutiveCrits: 0
   GunConsecutiveCritsDamage: 0
   GunGuranteedCrits: 0
   GunCritSlow: 0
@@ -387,10 +391,8 @@ MonoBehaviour:
   GunDoubleCritColor: {r: 0, g: 1, b: 1, a: 1}
   GunCritBulletSpeed: 0
   GunCritSimulationSpeed: 0
-  GunUnblockableCrits: 0
   GunCritHeal: 0
-  GunCritBlockCDReduction: 0
-  GunBlockingCrits: 0
+  GunCritAmmo: 0
 --- !u!114 &114803116625904636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,3 +424,20 @@ MonoBehaviour:
   CategoryPath: 
   categoryAsset: {fileID: 0}
   Priority: 0
+--- !u!114 &114119786459103708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043437007509817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 266422387, guid: ae9cca6a71a534844a0652e20eb60e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  view: {fileID: 0}
+  PlayerLuck: 0
+  LuckAdd: 50
+  LuckMult: 1
